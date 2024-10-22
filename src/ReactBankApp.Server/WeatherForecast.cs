@@ -1,4 +1,4 @@
-namespace BankAppReact.Server
+namespace ReactBankApp.Server
 {
     public class WeatherForecast
     {

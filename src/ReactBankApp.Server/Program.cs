@@ -1,5 +1,5 @@
 
-namespace BankAppReact.Server
+namespace ReactBankApp.Server
 {
     public class Program
     {
@@ -25,6 +25,8 @@ namespace BankAppReact.Server
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
