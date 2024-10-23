@@ -25,8 +25,7 @@ namespace ReactBank.Infra.Data.Migrations
                     ZipCode = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdentityDocument = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,8 +109,7 @@ namespace ReactBank.Infra.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Account_CustomerId",
                 table: "Account",
-                column: "CustomerId",
-                unique: true);
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_Email",

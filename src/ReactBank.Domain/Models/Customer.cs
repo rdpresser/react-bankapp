@@ -14,8 +14,5 @@ namespace ReactBank.Domain.Models
         public DateTime DateOfBirth { get; set; }
         public string IdentityDocument { get; set; }
         public bool IsActive { get; set; }
-
-        public Guid AccountId { get; set; }
-        public virtual Account Account { get; set; }
     }
 }

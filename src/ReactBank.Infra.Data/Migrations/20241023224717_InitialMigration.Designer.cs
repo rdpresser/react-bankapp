@@ -12,7 +12,7 @@ using ReactBank.Infra.Data.Context;
 namespace ReactBank.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241023222719_InitialMigration")]
+    [Migration("20241023224717_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -63,8 +63,7 @@ namespace ReactBank.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique();
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Account");
                 });
@@ -73,9 +72,6 @@ namespace ReactBank.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
@@ -211,8 +207,8 @@ namespace ReactBank.Infra.Data.Migrations
             modelBuilder.Entity("ReactBank.Domain.Models.Account", b =>
                 {
                     b.HasOne("ReactBank.Domain.Models.Customer", "Customer")
-                        .WithOne("Account")
-                        .HasForeignKey("ReactBank.Domain.Models.Account", "CustomerId")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -254,12 +250,6 @@ namespace ReactBank.Infra.Data.Migrations
                     b.Navigation("Loans");
 
                     b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("ReactBank.Domain.Models.Customer", b =>
-                {
-                    b.Navigation("Account")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

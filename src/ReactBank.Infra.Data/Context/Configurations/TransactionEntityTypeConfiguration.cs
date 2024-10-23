@@ -11,6 +11,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
         {
             base.Configure(builder);
 
+            //Property configurations
             builder.Property(x => x.Amount)
                 .IsRequired();
 
@@ -20,10 +21,12 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.Property(x => x.DateTime)
                 .IsRequired();
 
+            //Index configurations
             builder.HasIndex(x => x.DateTime);
             builder.HasIndex(x => x.DestinationAccountId);
             builder.HasIndex(x => x.SourceAccountId);
 
+            //Relationships
             builder.HasOne(x => x.SourceAccount)
                 .WithMany(x => x.Transactions)
                 .HasForeignKey(x => x.SourceAccountId)

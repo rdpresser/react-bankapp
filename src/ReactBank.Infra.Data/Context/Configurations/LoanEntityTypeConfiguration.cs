@@ -10,6 +10,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
         {
             base.Configure(builder);
 
+            //Property configurations
             builder.Property(x => x.Amount)
                 .IsRequired();
 
@@ -32,6 +33,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.Property(x => x.AccountId)
                 .IsRequired();
 
+            //Relationships
             builder.HasOne(x => x.Account)
                 .WithMany(x => x.Loans)
                 .HasForeignKey(x => x.AccountId);

@@ -11,6 +11,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
         {
             base.Configure(builder);
 
+            //Property configurations
             builder.Property(x => x.Balance)
                 .IsRequired();
 
@@ -26,10 +27,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.Property(x => x.IsActive)
                 .IsRequired();
 
-            builder.HasOne(x => x.Customer)
-                .WithOne(x => x.Account)
-                .HasForeignKey<Account>(x => x.CustomerId);
-
+            //Relationships
             builder.HasMany(x => x.Loans)
                 .WithOne(x => x.Account)
                 .HasForeignKey(x => x.AccountId);
@@ -42,7 +40,43 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.HasMany<Transaction>()
                 .WithOne(x => x.DestinationAccount)
                 .HasForeignKey(x => x.DestinationAccountId)
-                .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Restrict);
+
+            //Global query filter
+            builder.HasQueryFilter(x => x.IsActive);
+
+            //Seed data
+            builder.HasData(
+                new Account
+                {
+                    Id = Guid.Parse("ba669725-8233-434a-9b1e-751dd752e419"),
+                    AccountNumber = "123456789",
+                    Balance = 1000,
+                    Currency = "US$",
+                    AccountType = "Checking Account",
+                    IsActive = true,
+                    CustomerId = Guid.Parse("849b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                },
+                new Account
+                {
+                    Id = Guid.Parse("ba769725-8233-434a-9b1e-751dd752e419"),
+                    AccountNumber = "923456789",
+                    Balance = 900,
+                    Currency = "US$",
+                    AccountType = "Saving Account",
+                    IsActive = true,
+                    CustomerId = Guid.Parse("889b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                },
+                new Account
+                {
+                    Id = Guid.Parse("ba869725-8233-434a-9b1e-751dd752e419"),
+                    AccountNumber = "823456789",
+                    Balance = 850,
+                    Currency = "US$",
+                    AccountType = "Student Account",
+                    IsActive = false,
+                    CustomerId = Guid.Parse("888b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                });
         }
     }
 }
