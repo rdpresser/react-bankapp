@@ -9,9 +9,13 @@ namespace ReactBank.Domain.Models
         public string Phone { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string IdentityDocument { get; set; }
+        public bool IsActive { get; set; }
 
-        public virtual Account Accounts { get; set; }
+        public Guid AccountId { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

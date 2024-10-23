@@ -55,6 +55,9 @@ namespace ReactBank.Infra.Data.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId")
@@ -69,8 +72,10 @@ namespace ReactBank.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(2000)
                         .IsUnicode(false)
                         .HasColumnType("varchar(2000)");
@@ -90,6 +95,9 @@ namespace ReactBank.Infra.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -102,13 +110,28 @@ namespace ReactBank.Infra.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<string>("State")
+                        .HasMaxLength(2000)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(2000)");
+
                     b.Property<string>("StreetAddress")
                         .IsRequired()
                         .HasMaxLength(2000)
                         .IsUnicode(false)
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(2000)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Email");
+
+                    b.HasIndex("Name");
 
                     b.ToTable("Customer");
                 });
@@ -173,6 +196,8 @@ namespace ReactBank.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DateTime");
+
                     b.HasIndex("DestinationAccountId");
 
                     b.HasIndex("SourceAccountId");
@@ -183,7 +208,7 @@ namespace ReactBank.Infra.Data.Migrations
             modelBuilder.Entity("ReactBank.Domain.Models.Account", b =>
                 {
                     b.HasOne("ReactBank.Domain.Models.Customer", "Customer")
-                        .WithOne("Accounts")
+                        .WithOne("Account")
                         .HasForeignKey("ReactBank.Domain.Models.Account", "CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -194,7 +219,7 @@ namespace ReactBank.Infra.Data.Migrations
             modelBuilder.Entity("ReactBank.Domain.Models.Loan", b =>
                 {
                     b.HasOne("ReactBank.Domain.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("Loans")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -211,7 +236,7 @@ namespace ReactBank.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("ReactBank.Domain.Models.Account", "SourceAccount")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("SourceAccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -221,9 +246,16 @@ namespace ReactBank.Infra.Data.Migrations
                     b.Navigation("SourceAccount");
                 });
 
+            modelBuilder.Entity("ReactBank.Domain.Models.Account", b =>
+                {
+                    b.Navigation("Loans");
+
+                    b.Navigation("Transactions");
+                });
+
             modelBuilder.Entity("ReactBank.Domain.Models.Customer", b =>
                 {
-                    b.Navigation("Accounts")
+                    b.Navigation("Account")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

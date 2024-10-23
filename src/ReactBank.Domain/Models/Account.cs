@@ -8,8 +8,13 @@ namespace ReactBank.Domain.Models
         public decimal Balance { get; set; }
         public string Currency { get; set; } = "US$"; // Default value for "Currency
         public string AccountType { get; set; } //Create enum for AccountType (Checking Account, Savings Account, Business Account, Joint Account, Investment Account, Student Account, Salary Account)
-        public Guid CustomerId { get; set; }
+        public bool IsActive { get; set; } // Default value for "IsActive"
 
+        public Guid CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
+
+        public virtual ICollection<Loan> Loans { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

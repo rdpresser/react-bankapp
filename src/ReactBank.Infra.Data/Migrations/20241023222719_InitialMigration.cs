@@ -20,9 +20,13 @@ namespace ReactBank.Infra.Data.Migrations
                     Email = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     Phone = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     StreetAddress = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
-                    City = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
+                    City = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: true),
+                    State = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: true),
+                    ZipCode = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdentityDocument = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false)
+                    IdentityDocument = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,6 +42,7 @@ namespace ReactBank.Infra.Data.Migrations
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Currency = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     AccountType = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -109,9 +114,24 @@ namespace ReactBank.Infra.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customer_Email",
+                table: "Customer",
+                column: "Email");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customer_Name",
+                table: "Customer",
+                column: "Name");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Loan_AccountId",
                 table: "Loan",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transaction_DateTime",
+                table: "Transaction",
+                column: "DateTime");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transaction_DestinationAccountId",
