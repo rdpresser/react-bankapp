@@ -1,30 +1,30 @@
 import { useEffect, useState } from 'react';
 
 function Customer() {
-    const [forecasts, setForecasts] = useState();
+    const [data, setData] = useState();
 
     useEffect(() => {
-        populateWeatherData();
+        populateData();
     }, []);
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
+    const contents = data === undefined
+        ? <p><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Birth Date</th>
+                    <th>Document</th>
                 </tr>
             </thead>
             <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
+                {data.map(item =>
+                    <tr key={item.id}>
+                        <td>{item.name}</td>
+                        <td>{item.city}</td>
+                        <td>{item.dateOfBirth}</td>
+                        <td>{item.identityDocument}</td>
                     </tr>
                 )}
             </tbody>
@@ -32,16 +32,16 @@ function Customer() {
 
     return (
         <div>
-            <h1 id="tableLabel">Weather forecast</h1>
+            <h1 id="tableLabel">Customer List</h1>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
         </div>
     );
 
-    async function populateWeatherData() {
+    async function populateData() {
         const response = await fetch('/api/customer');
         const data = await response.json();
-        setForecasts(data);
+        setData(data);
     }
 }
 

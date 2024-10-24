@@ -10,7 +10,7 @@
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string IdentityDocument { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace ReactBank.Application.Services
                 State = x.State,
                 ZipCode = x.ZipCode,
                 City = x.City,
-                DateOfBirth = x.DateOfBirth,
+                DateOfBirth = x.DateOfBirth.ToString("MMMM dd, yyyy"),
                 Name = x.Name,
                 StreetAddress = x.StreetAddress,
                 Id = x.Id
@@ -63,7 +63,7 @@ namespace ReactBank.Application.Services
                 State = domainEntity.State,
                 ZipCode = domainEntity.ZipCode,
                 City = domainEntity.City,
-                DateOfBirth = domainEntity.DateOfBirth,
+                DateOfBirth = domainEntity.DateOfBirth.ToString("MMMM dd, yyyy"),
                 Name = domainEntity.Name,
                 StreetAddress = domainEntity.StreetAddress,
                 Id = domainEntity.Id
