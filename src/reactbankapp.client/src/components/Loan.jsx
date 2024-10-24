@@ -13,19 +13,19 @@ function Loan() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Birth Date</th>
-                    <th>Document</th>
+                    <th>Amount</th>
+                    <th>Rate</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(item =>
                     <tr key={item.id}>
-                        <td>{item.name}</td>
-                        <td>{item.city}</td>
-                        <td>{item.dateOfBirth}</td>
-                        <td>{item.identityDocument}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.interestRate}</td>
+                        <td>{item.startDate}</td>
+                        <td>{item.endDate}</td>
                     </tr>
                 )}
             </tbody>
