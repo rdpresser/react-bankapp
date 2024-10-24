@@ -97,6 +97,9 @@ GO
 BEGIN TRANSACTION;
 GO
 
+ALTER TABLE [Account] ADD [CreatedAt] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
+GO
+
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'City', N'DateOfBirth', N'Email', N'IdentityDocument', N'IsActive', N'Name', N'Phone', N'State', N'StreetAddress', N'ZipCode') AND [object_id] = OBJECT_ID(N'[Customer]'))
     SET IDENTITY_INSERT [Customer] ON;
 INSERT INTO [Customer] ([Id], [City], [DateOfBirth], [Email], [IdentityDocument], [IsActive], [Name], [Phone], [State], [StreetAddress], [ZipCode])
@@ -107,18 +110,24 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'City
     SET IDENTITY_INSERT [Customer] OFF;
 GO
 
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccountNumber', N'AccountType', N'Balance', N'Currency', N'CustomerId', N'IsActive') AND [object_id] = OBJECT_ID(N'[Account]'))
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccountNumber', N'AccountType', N'Balance', N'CreatedAt', N'Currency', N'CustomerId', N'IsActive') AND [object_id] = OBJECT_ID(N'[Account]'))
     SET IDENTITY_INSERT [Account] ON;
-INSERT INTO [Account] ([Id], [AccountNumber], [AccountType], [Balance], [Currency], [CustomerId], [IsActive])
-VALUES ('ba669725-8233-434a-9b1e-751dd752e419', '123456789', 'Checking Account', 1000.0, 'US$', '849b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(1 AS bit)),
-('ba769725-8233-434a-9b1e-751dd752e419', '923456789', 'Saving Account', 900.0, 'US$', '889b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(1 AS bit)),
-('ba869725-8233-434a-9b1e-751dd752e419', '823456789', 'Student Account', 850.0, 'US$', '888b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(0 AS bit));
-IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccountNumber', N'AccountType', N'Balance', N'Currency', N'CustomerId', N'IsActive') AND [object_id] = OBJECT_ID(N'[Account]'))
+INSERT INTO [Account] ([Id], [AccountNumber], [AccountType], [Balance], [CreatedAt], [Currency], [CustomerId], [IsActive])
+VALUES ('ba669725-8233-434a-9b1e-751dd752e419', '123456789', 'Checking Account', 1000.0, '2021-01-01T00:00:00.0000000', 'US$', '849b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(1 AS bit)),
+('ba769725-8233-434a-9b1e-751dd752e419', '923456789', 'Saving Account', 900.0, '2020-02-02T00:00:00.0000000', 'US$', '889b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(1 AS bit)),
+('ba869725-8233-434a-9b1e-751dd752e419', '823456789', 'Student Account', 850.0, '2023-03-03T00:00:00.0000000', 'US$', '888b24e4-f29a-4fb4-91b7-7a9b65795bf6', CAST(0 AS bit));
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AccountNumber', N'AccountType', N'Balance', N'CreatedAt', N'Currency', N'CustomerId', N'IsActive') AND [object_id] = OBJECT_ID(N'[Account]'))
     SET IDENTITY_INSERT [Account] OFF;
 GO
 
+CREATE INDEX [IX_Account_AccountNumber] ON [Account] ([AccountNumber]);
+GO
+
+CREATE INDEX [IX_Account_CreatedAt] ON [Account] ([CreatedAt]);
+GO
+
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20241023234019_SeedData', N'8.0.10');
+VALUES (N'20241024034647_SeedDatabase', N'8.0.10');
 GO
 
 COMMIT;
