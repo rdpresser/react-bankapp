@@ -27,6 +27,10 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.Property(x => x.IsActive)
                 .IsRequired();
 
+            //Indexes
+            builder.HasIndex(x => x.CreatedAt);
+            builder.HasIndex(x => x.AccountNumber);
+
             //Relationships
             builder.HasMany(x => x.Loans)
                 .WithOne(x => x.Account)
@@ -55,7 +59,8 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     Currency = "US$",
                     AccountType = "Checking Account",
                     IsActive = true,
-                    CustomerId = Guid.Parse("849b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                    CustomerId = Guid.Parse("849b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
+                    CreatedAt = new DateTime(2021, 1, 1)
                 },
                 new Account
                 {
@@ -65,7 +70,8 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     Currency = "US$",
                     AccountType = "Saving Account",
                     IsActive = true,
-                    CustomerId = Guid.Parse("889b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                    CustomerId = Guid.Parse("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
+                    CreatedAt = new DateTime(2020, 2, 2)
                 },
                 new Account
                 {
@@ -75,7 +81,8 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     Currency = "US$",
                     AccountType = "Student Account",
                     IsActive = false,
-                    CustomerId = Guid.Parse("888b24e4-f29a-4fb4-91b7-7a9b65795bf6")
+                    CustomerId = Guid.Parse("888b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
+                    CreatedAt = new DateTime(2023, 3, 3)
                 });
         }
     }

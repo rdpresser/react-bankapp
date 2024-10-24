@@ -46,6 +46,9 @@ namespace ReactBank.Infra.Data.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -60,6 +63,10 @@ namespace ReactBank.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountNumber");
+
+                    b.HasIndex("CreatedAt");
+
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Account");
@@ -71,6 +78,7 @@ namespace ReactBank.Infra.Data.Migrations
                             AccountNumber = "123456789",
                             AccountType = "Checking Account",
                             Balance = 1000m,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",
                             CustomerId = new Guid("849b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                             IsActive = true
@@ -81,6 +89,7 @@ namespace ReactBank.Infra.Data.Migrations
                             AccountNumber = "923456789",
                             AccountType = "Saving Account",
                             Balance = 900m,
+                            CreatedAt = new DateTime(2020, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",
                             CustomerId = new Guid("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                             IsActive = true
@@ -91,6 +100,7 @@ namespace ReactBank.Infra.Data.Migrations
                             AccountNumber = "823456789",
                             AccountType = "Student Account",
                             Balance = 850m,
+                            CreatedAt = new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",
                             CustomerId = new Guid("888b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                             IsActive = false

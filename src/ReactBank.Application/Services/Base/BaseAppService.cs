@@ -4,7 +4,7 @@ namespace ReactBank.Application.Services.Base
 {
     public abstract class BaseAppService(IUnitOfWork unitOfWork)
     {
-        protected readonly IUnitOfWork _unitOfWork = unitOfWork;
+        private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
         protected async Task<bool> CommitAsync()
         {

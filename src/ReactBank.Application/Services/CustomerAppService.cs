@@ -14,7 +14,7 @@ namespace ReactBank.Application.Services
         public CustomerAppService(IUnitOfWork unitOfWork, ICustomerService customerService)
             : base(unitOfWork, customerService)
         {
-            _customerService = customerService;
+            _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService), $"{nameof(customerService)} could not be null");
         }
 
         public override Customer MapDataRequestToDomainEntity(CustomerDataRequest dataContract)

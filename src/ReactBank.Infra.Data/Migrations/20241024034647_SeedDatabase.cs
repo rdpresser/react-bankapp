@@ -8,11 +8,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ReactBank.Infra.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedData : Migration
+    public partial class SeedDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<DateTime>(
+                name: "CreatedAt",
+                table: "Account",
+                type: "datetime2",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
             migrationBuilder.InsertData(
                 table: "Customer",
                 columns: new[] { "Id", "City", "DateOfBirth", "Email", "IdentityDocument", "IsActive", "Name", "Phone", "State", "StreetAddress", "ZipCode" },
@@ -25,18 +32,36 @@ namespace ReactBank.Infra.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Account",
-                columns: new[] { "Id", "AccountNumber", "AccountType", "Balance", "Currency", "CustomerId", "IsActive" },
+                columns: new[] { "Id", "AccountNumber", "AccountType", "Balance", "CreatedAt", "Currency", "CustomerId", "IsActive" },
                 values: new object[,]
                 {
-                    { new Guid("ba669725-8233-434a-9b1e-751dd752e419"), "123456789", "Checking Account", 1000m, "US$", new Guid("849b24e4-f29a-4fb4-91b7-7a9b65795bf6"), true },
-                    { new Guid("ba769725-8233-434a-9b1e-751dd752e419"), "923456789", "Saving Account", 900m, "US$", new Guid("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"), true },
-                    { new Guid("ba869725-8233-434a-9b1e-751dd752e419"), "823456789", "Student Account", 850m, "US$", new Guid("888b24e4-f29a-4fb4-91b7-7a9b65795bf6"), false }
+                    { new Guid("ba669725-8233-434a-9b1e-751dd752e419"), "123456789", "Checking Account", 1000m, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US$", new Guid("849b24e4-f29a-4fb4-91b7-7a9b65795bf6"), true },
+                    { new Guid("ba769725-8233-434a-9b1e-751dd752e419"), "923456789", "Saving Account", 900m, new DateTime(2020, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "US$", new Guid("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"), true },
+                    { new Guid("ba869725-8233-434a-9b1e-751dd752e419"), "823456789", "Student Account", 850m, new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "US$", new Guid("888b24e4-f29a-4fb4-91b7-7a9b65795bf6"), false }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Account_AccountNumber",
+                table: "Account",
+                column: "AccountNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Account_CreatedAt",
+                table: "Account",
+                column: "CreatedAt");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropIndex(
+                name: "IX_Account_AccountNumber",
+                table: "Account");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Account_CreatedAt",
+                table: "Account");
+
             migrationBuilder.DeleteData(
                 table: "Account",
                 keyColumn: "Id",
@@ -66,6 +91,10 @@ namespace ReactBank.Infra.Data.Migrations
                 table: "Customer",
                 keyColumn: "Id",
                 keyValue: new Guid("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"));
+
+            migrationBuilder.DropColumn(
+                name: "CreatedAt",
+                table: "Account");
         }
     }
 }

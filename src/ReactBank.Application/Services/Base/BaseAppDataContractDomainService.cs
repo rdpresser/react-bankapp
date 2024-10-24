@@ -21,6 +21,7 @@ namespace ReactBank.Application.Services.Base
         public async Task<TDataResponse> CreateAsync(TDataRequest dataRequest)
         {
             var domainEntity = MapDataRequestToDomainEntity(dataRequest);
+            domainEntity.Id = Guid.NewGuid();
             domainEntity = await _baseService.AddAsync(domainEntity);
             await CommitAsync();
 
