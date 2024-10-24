@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReactBank.Infra.CrossCutting.IoC\ReactBank.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\ReactBank.Infra.Data\ReactBank.Infra.Data.csproj" />
   </ItemGroup>
 

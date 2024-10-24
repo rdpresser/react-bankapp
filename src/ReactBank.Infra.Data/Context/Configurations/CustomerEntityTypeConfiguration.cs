@@ -33,7 +33,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
             builder.HasIndex(x => x.Name);
             builder.HasIndex(x => x.Email);
 
-            //Global query filter
+            //Global query filter - make sure only active records are listed
             builder.HasQueryFilter(x => x.IsActive);
 
             //Seed data

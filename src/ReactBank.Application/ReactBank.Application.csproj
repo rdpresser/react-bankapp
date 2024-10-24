@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReactBank.Domain.Core\ReactBank.Domain.Core.csproj" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.9.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Validations\" />
-    <Folder Include="Validations\" />
+    <ProjectReference Include="..\ReactBank.Domain\ReactBank.Domain.csproj" />
   </ItemGroup>
 
 </Project>

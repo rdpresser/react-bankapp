@@ -42,7 +42,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
                 .HasForeignKey(x => x.DestinationAccountId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            //Global query filter
+            //Global query filter - make sure only active records are listed
             builder.HasQueryFilter(x => x.IsActive);
 
             //Seed data

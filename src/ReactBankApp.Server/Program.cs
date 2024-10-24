@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using ReactBank.Infra.CrossCutting.IoC;
 using ReactBank.Infra.Data.Context;
 
 namespace ReactBankApp.Server
@@ -16,7 +17,9 @@ namespace ReactBankApp.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<ApplicationDbContext>();
+
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.RegisterServices(builder.Configuration);
 
             var app = builder.Build();
 

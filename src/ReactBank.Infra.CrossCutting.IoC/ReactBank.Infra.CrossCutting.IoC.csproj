@@ -8,11 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReactBank.Domain.Core\ReactBank.Domain.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\Validations\" />
-    <Folder Include="Validations\" />
+    <ProjectReference Include="..\ReactBank.Domain\ReactBank.Domain.csproj" />
+    <ProjectReference Include="..\ReactBank.Infra.Data\ReactBank.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
