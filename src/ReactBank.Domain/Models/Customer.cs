@@ -13,6 +13,6 @@ namespace ReactBank.Domain.Models
         public string ZipCode { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string IdentityDocument { get; set; }
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

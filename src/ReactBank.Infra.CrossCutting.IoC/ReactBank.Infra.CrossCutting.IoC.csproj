@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ReactBank.Application\ReactBank.Application.csproj" />
     <ProjectReference Include="..\ReactBank.Domain.Core\ReactBank.Domain.Core.csproj" />
     <ProjectReference Include="..\ReactBank.Domain\ReactBank.Domain.csproj" />
     <ProjectReference Include="..\ReactBank.Infra.Data\ReactBank.Infra.Data.csproj" />

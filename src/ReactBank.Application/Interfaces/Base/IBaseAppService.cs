@@ -7,8 +7,8 @@
     {
         Task<TDataResponse> CreateAsync(TDataRequest dataContract);
         Task<TDataResponse> UpdateAsync(TDataRequest dataContract);
-        Task<TDataResponse> DeleteAsync(TDataRequest dataContract);
-        Task<TDataResponse> GetByIdAsync(int id);
+        Task<TDataResponse> DeleteAsync(Guid id);
+        Task<TDataResponse> GetByIdAsync(Guid id);
         Task<IEnumerable<TDataResponse>> GetAllAsync();
     }
 }

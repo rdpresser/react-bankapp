@@ -19,6 +19,7 @@ namespace ReactBank.Infra.Data.Context
             {
                 base.OnConfiguring(optionsBuilder);
                 optionsBuilder.UseLazyLoadingProxies();
+                optionsBuilder.EnableSensitiveDataLogging(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development");
 
                 if (_isInMemory)
                 {

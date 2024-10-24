@@ -1,4 +1,5 @@
-﻿using ReactBank.Application.DataContracts;
+﻿using Microsoft.EntityFrameworkCore;
+using ReactBank.Application.DataContracts;
 using ReactBank.Application.Interfaces;
 using ReactBank.Application.Services.Base;
 using ReactBank.Domain.Interfaces.Repositores;
@@ -15,6 +16,25 @@ namespace ReactBank.Application.Services
             : base(unitOfWork, customerService)
         {
             _customerService = customerService ?? throw new ArgumentNullException(nameof(customerService), $"{nameof(customerService)} could not be null");
+        }
+
+        public override async Task<IEnumerable<CustomerDataResponse>> GetAllAsync()
+        {
+            var list = await BaseService.GetAllNoTracking().ToListAsync();
+
+            return list.Select(x => new CustomerDataResponse
+            {
+                Email = x.Email,
+                IdentityDocument = x.IdentityDocument,
+                Phone = x.Phone,
+                State = x.State,
+                ZipCode = x.ZipCode,
+                City = x.City,
+                DateOfBirth = x.DateOfBirth,
+                Name = x.Name,
+                StreetAddress = x.StreetAddress,
+                Id = x.Id
+            });
         }
 
         public override Customer MapDataRequestToDomainEntity(CustomerDataRequest dataContract)

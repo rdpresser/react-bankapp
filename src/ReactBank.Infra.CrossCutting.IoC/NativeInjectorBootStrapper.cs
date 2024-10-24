@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ReactBank.Application.Interfaces;
+using ReactBank.Application.Services;
 using ReactBank.Domain.Interfaces.Repositores;
 using ReactBank.Domain.Interfaces.Repositores.Base;
 using ReactBank.Domain.Interfaces.Services;
@@ -7,6 +9,7 @@ using ReactBank.Domain.Services;
 using ReactBank.Infra.Data.Context;
 using ReactBank.Infra.Data.Repositories;
 using ReactBank.Infra.Data.Repositories.Base;
+using ReactBank.Infra.Data.UoW;
 
 namespace ReactBank.Infra.CrossCutting.IoC
 {
@@ -24,6 +27,7 @@ namespace ReactBank.Infra.CrossCutting.IoC
         private static void RegisterInfra(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
@@ -42,6 +46,10 @@ namespace ReactBank.Infra.CrossCutting.IoC
         private static void RegisterApplication(IServiceCollection services)
         {
             // services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IAccountAppService, AccountAppService>();
+            services.AddScoped<ICustomerAppService, CustomerAppService>();
+            services.AddScoped<ILoanAppService, LoanAppService>();
+            services.AddScoped<ITransactionAppService, TransactionAppService>();
         }
     }
 }

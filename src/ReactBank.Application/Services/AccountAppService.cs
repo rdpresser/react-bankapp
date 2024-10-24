@@ -1,4 +1,5 @@
-﻿using ReactBank.Application.DataContracts;
+﻿using Microsoft.EntityFrameworkCore;
+using ReactBank.Application.DataContracts;
 using ReactBank.Application.Interfaces;
 using ReactBank.Application.Services.Base;
 using ReactBank.Domain.Interfaces.Repositores;
@@ -15,6 +16,19 @@ namespace ReactBank.Application.Services
             : base(unitOfWork, accountService)
         {
             _accountService = accountService ?? throw new ArgumentNullException(nameof(accountService), $"{nameof(accountService)} could not be null");
+        }
+
+        public override async Task<IEnumerable<AccountDataResponse>> GetAllAsync()
+        {
+            var list = await BaseService.GetAllNoTracking().ToListAsync();
+            return list.Select(x => new AccountDataResponse
+            {
+                AccountNumber = x.AccountNumber,
+                Balance = x.Balance,
+                Currency = x.Currency,
+                AccountType = x.AccountType,
+                Id = x.Id
+            });
         }
 
         public override Account MapDataRequestToDomainEntity(AccountDataRequest dataContract)

@@ -5,30 +5,31 @@ using ReactBank.Domain.Interfaces.Services.Base;
 
 namespace ReactBank.Application.Services.Base
 {
-    public abstract class BaseAppDataContractDomainService<TDataRequest, TDataResponse, TDomainEntity> : BaseAppService, IBaseAppService<TDataRequest, TDataResponse>
+    public abstract class BaseAppDataContractDomainService<TDataRequest, TDataResponse, TDomainEntity>
+        : BaseAppService, IBaseAppService<TDataRequest, TDataResponse>
         where TDataRequest : class, new()
         where TDataResponse : class, new()
         where TDomainEntity : BaseEntity, new()
     {
-        private readonly IBaseService<TDomainEntity> _baseService;
+        protected IBaseService<TDomainEntity> BaseService { get; }
 
         protected BaseAppDataContractDomainService(IUnitOfWork unitOfWork, IBaseService<TDomainEntity> baseService)
             : base(unitOfWork)
         {
-            _baseService = baseService ?? throw new ArgumentNullException(nameof(baseService), $"{nameof(baseService)} could not be null");
+            BaseService = baseService ?? throw new ArgumentNullException(nameof(baseService), $"{nameof(baseService)} could not be null");
         }
 
         public async Task<TDataResponse> CreateAsync(TDataRequest dataRequest)
         {
             var domainEntity = MapDataRequestToDomainEntity(dataRequest);
             domainEntity.Id = Guid.NewGuid();
-            domainEntity = await _baseService.AddAsync(domainEntity);
+            domainEntity = await BaseService.AddAsync(domainEntity);
             await CommitAsync();
 
             return MapDomainEntityToDataResponse(domainEntity);
         }
 
-        public Task<TDataResponse> DeleteAsync(TDataRequest dataRequest)
+        public Task<TDataResponse> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -38,14 +39,16 @@ namespace ReactBank.Application.Services.Base
             GC.SuppressFinalize(this);
         }
 
-        public Task<IEnumerable<TDataResponse>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract Task<IEnumerable<TDataResponse>> GetAllAsync();
 
-        public Task<TDataResponse> GetByIdAsync(int id)
+        public async Task<TDataResponse> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var domainEntity = await BaseService.GetByIdAsync(id);
+            if (domainEntity == null)
+            {
+                return null;
+            }
+            return MapDomainEntityToDataResponse(domainEntity);
         }
 
         public Task<TDataResponse> UpdateAsync(TDataRequest dataRequest)
