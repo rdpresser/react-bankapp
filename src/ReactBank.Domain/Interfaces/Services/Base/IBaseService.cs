@@ -8,5 +8,6 @@ namespace ReactBank.Domain.Interfaces.Services.Base
         Task<TEntity> GetByIdAsync(Guid id);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAllNoTracking();
+        Task<TEntity> UpdateAsync(TEntity entity);
     }
 }

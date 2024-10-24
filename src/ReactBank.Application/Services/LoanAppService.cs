@@ -21,15 +21,7 @@ namespace ReactBank.Application.Services
         public override async Task<IEnumerable<LoanDataResponse>> GetAllAsync()
         {
             var list = await BaseService.GetAllNoTracking().ToListAsync();
-            return list.Select(x => new LoanDataResponse
-            {
-                Amount = x.Amount,
-                AccountId = x.AccountId,
-                StartDate = x.StartDate,
-                EndDate = x.EndDate,
-                InterestRate = x.InterestRate,
-                Id = x.Id
-            });
+            return list.Select(x => MapDomainEntityToDataResponse(x));
         }
 
         public override Loan MapDataRequestToDomainEntity(LoanDataRequest dataContract)

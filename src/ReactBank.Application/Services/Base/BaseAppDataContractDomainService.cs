@@ -51,9 +51,12 @@ namespace ReactBank.Application.Services.Base
             return MapDomainEntityToDataResponse(domainEntity);
         }
 
-        public Task<TDataResponse> UpdateAsync(TDataRequest dataRequest)
+        public async Task<TDataResponse> UpdateAsync(TDataRequest dataRequest)
         {
-            throw new NotImplementedException();
+            var domainEntity = MapDataRequestToDomainEntity(dataRequest);
+            await BaseService.UpdateAsync(domainEntity);
+
+            return MapDomainEntityToDataResponse(domainEntity);
         }
 
         public abstract TDomainEntity MapDataRequestToDomainEntity(TDataRequest dataContract);

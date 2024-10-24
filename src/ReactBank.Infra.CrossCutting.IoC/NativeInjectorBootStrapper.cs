@@ -41,15 +41,16 @@ namespace ReactBank.Infra.CrossCutting.IoC
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<IOperationService, OperationService>();
         }
 
         private static void RegisterApplication(IServiceCollection services)
         {
-            // services.AddScoped<IApplicationService, ApplicationService>();
             services.AddScoped<IAccountAppService, AccountAppService>();
             services.AddScoped<ICustomerAppService, CustomerAppService>();
             services.AddScoped<ILoanAppService, LoanAppService>();
             services.AddScoped<ITransactionAppService, TransactionAppService>();
+            services.AddScoped<IOperationAppService, OperationAppService>();
         }
     }
 }

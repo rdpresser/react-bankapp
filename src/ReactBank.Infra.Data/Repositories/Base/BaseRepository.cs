@@ -43,5 +43,18 @@ namespace ReactBank.Infra.Data.Repositories.Base
         {
             return await DbSet.FindAsync(id);
         }
+
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            var dbEntity = await GetByIdAsync(entity.Id);
+            if (dbEntity == null)
+            {
+                return null;
+            }
+
+            dbEntity = entity;
+            DbSet.Update(dbEntity);
+            return dbEntity;
+        }
     }
 }

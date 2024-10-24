@@ -32,5 +32,10 @@ namespace ReactBank.Domain.Services.Base
         {
             return await _baseRepository.GetByIdAsync(id);
         }
+
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            return await _baseRepository.UpdateAsync(entity);
+        }
     }
 }

@@ -21,14 +21,7 @@ namespace ReactBank.Application.Services
         public override async Task<IEnumerable<AccountDataResponse>> GetAllAsync()
         {
             var list = await BaseService.GetAllNoTracking().ToListAsync();
-            return list.Select(x => new AccountDataResponse
-            {
-                AccountNumber = x.AccountNumber,
-                Balance = x.Balance,
-                Currency = x.Currency,
-                AccountType = x.AccountType,
-                Id = x.Id
-            });
+            return list.Select(x => MapDomainEntityToDataResponse(x));
         }
 
         public override Account MapDataRequestToDomainEntity(AccountDataRequest dataContract)

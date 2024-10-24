@@ -13,19 +13,20 @@ function Transaction() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Birth Date</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                    <th>DateTime</th>
                     <th>Document</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(item =>
                     <tr key={item.id}>
-                        <td>{item.name}</td>
-                        <td>{item.city}</td>
-                        <td>{item.dateOfBirth}</td>
-                        <td>{item.identityDocument}</td>
+                        <td>{item.transactionType}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.dateTime}</td>
+                        <td>{item.sourceAccount}</td>
+                        <td>{item.destinationAccount}</td>
                     </tr>
                 )}
             </tbody>

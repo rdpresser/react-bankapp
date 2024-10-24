@@ -21,16 +21,7 @@ namespace ReactBank.Application.Services
         public override async Task<IEnumerable<TransactionDataResponse>> GetAllAsync()
         {
             var list = await BaseService.GetAllNoTracking().ToListAsync();
-            return list.Select(x => new TransactionDataResponse
-            {
-                Amount = x.Amount,
-                Currency = x.Currency,
-                DateTime = x.DateTime,
-                DestinationAccountId = x.DestinationAccountId,
-                SourceAccountId = x.SourceAccountId,
-                TransactionType = x.TransactionType,
-                Id = x.Id
-            });
+            return list.Select(x => MapDomainEntityToDataResponse(x));
         }
 
         public override Transaction MapDataRequestToDomainEntity(TransactionDataRequest dataContract)
@@ -52,9 +43,9 @@ namespace ReactBank.Application.Services
             {
                 Amount = domainEntity.Amount,
                 Currency = domainEntity.Currency,
-                DateTime = domainEntity.DateTime,
-                DestinationAccountId = domainEntity.DestinationAccountId,
-                SourceAccountId = domainEntity.SourceAccountId,
+                DateTime = domainEntity.DateTime.ToString("MMMM dd, yyyy HH:mm"),
+                DestinationAccount = $"{domainEntity.DestinationAccount.Customer.Name} - {domainEntity.DestinationAccountId}",
+                SourceAccount = $"{domainEntity.DestinationAccount.Customer.Name} - {domainEntity.SourceAccountId}",
                 TransactionType = domainEntity.TransactionType,
                 Id = domainEntity.Id
             };
