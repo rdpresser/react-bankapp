@@ -8,15 +8,15 @@ const data = [
 	},
 	{
 		title: 'Account',
-		link: '/api/account',
+		link: '/account',
 	},
 	{
 		title: 'Loan',
-		link: '/api/load',
+		link: '/loan',
 	},
 	{
 		title: 'Transactions',
-		link: '/api/transaction',
+		link: '/transaction',
 	},
 ];
 const Header = ({ title }) => {

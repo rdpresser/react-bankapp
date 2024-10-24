@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from './Header'
 
-function Customer() {
+function Loan() {
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -34,17 +34,17 @@ function Customer() {
     return (
         <div>
             <Header title='Menu' />
-            <h1 id="tableLabel">Customer List</h1>
+            <h1 id="tableLabel">Loan List</h1>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
         </div>
     );
 
     async function populateData() {
-        const response = await fetch('/api/customer');
+        const response = await fetch('/api/loan');
         const data = await response.json();
         setData(data);
     }
 }
 
-export default Customer;
+export default Loan;

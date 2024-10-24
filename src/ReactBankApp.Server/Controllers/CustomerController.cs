@@ -12,7 +12,7 @@ namespace ReactBankApp.Server.Controllers
 
         public CustomerController(ICustomerAppService customerAppService)
         {
-            _customerAppService = customerAppService;
+            _customerAppService = customerAppService ?? throw new ArgumentNullException(nameof(customerAppService), $"{nameof(customerAppService)} could not be null");
         }
 
         [HttpGet]

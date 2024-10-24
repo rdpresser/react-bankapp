@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from './Header'
 
-function Customer() {
+function Account() {
     const [data, setData] = useState();
 
     useEffect(() => {
@@ -13,19 +13,19 @@ function Customer() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>City</th>
-                    <th>Birth Date</th>
-                    <th>Document</th>
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Currency</th>
+                    <th>Account Type</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(item =>
                     <tr key={item.id}>
-                        <td>{item.name}</td>
-                        <td>{item.city}</td>
-                        <td>{item.dateOfBirth}</td>
-                        <td>{item.identityDocument}</td>
+                        <td>{item.accountNumber}</td>
+                        <td>{item.balance}</td>
+                        <td>{item.currency}</td>
+                        <td>{item.accountType}</td>
                     </tr>
                 )}
             </tbody>
@@ -41,10 +41,10 @@ function Customer() {
     );
 
     async function populateData() {
-        const response = await fetch('/api/customer');
+        const response = await fetch('/api/account');
         const data = await response.json();
         setData(data);
     }
 }
 
-export default Customer;
+export default Account;
