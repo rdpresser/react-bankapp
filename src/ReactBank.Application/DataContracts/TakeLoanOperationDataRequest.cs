@@ -2,8 +2,10 @@
 
 namespace ReactBank.Application.DataContracts
 {
-    public class LoanDataRequest
+    public class TakeLoanOperationDataRequest
     {
+        [RequiredGuidValidation]
+        public Guid AccountId { get; set; }
         [RequiredValidation]
         public decimal Amount { get; set; }
         [RequiredValidation]
@@ -11,8 +13,6 @@ namespace ReactBank.Application.DataContracts
         [RequiredValidation]
         public DateTime StartDate { get; set; } = DateTime.UtcNow; // Default value for "StartDate"
         [RequiredValidation]
-        public DateTime EndDate { get; set; }
-        [RequiredGuidValidation]
-        public Guid AccountId { get; set; }
+        public DateTime EndDate { get; set; } = DateTime.UtcNow.AddMonths(3); // Default value for "EndDate"
     }
 }

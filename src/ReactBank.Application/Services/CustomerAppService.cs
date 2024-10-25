@@ -20,7 +20,9 @@ namespace ReactBank.Application.Services
 
         public override async Task<IEnumerable<CustomerDataResponse>> GetAllAsync()
         {
-            var list = await BaseService.GetAllNoTracking().ToListAsync();
+            var list = await BaseService.GetAllNoTracking()
+                .OrderBy(x => x.Name)
+                .ToListAsync();
             return list.Select(x => MapDomainEntityToDataResponse(x));
         }
 

@@ -16,7 +16,8 @@ function Transaction() {
                     <th>Transaction Type</th>
                     <th>Amount</th>
                     <th>DateTime</th>
-                    <th>Document</th>
+                    <th>Source Account</th>
+                    <th>Destination Account</th>
                 </tr>
             </thead>
             <tbody>

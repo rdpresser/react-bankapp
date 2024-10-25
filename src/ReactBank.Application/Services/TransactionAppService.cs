@@ -20,7 +20,9 @@ namespace ReactBank.Application.Services
 
         public override async Task<IEnumerable<TransactionDataResponse>> GetAllAsync()
         {
-            var list = await BaseService.GetAllNoTracking().ToListAsync();
+            var list = await BaseService.GetAllNoTracking()
+                .OrderByDescending(x => x.DateTime)
+                .ToListAsync();
             return list.Select(x => MapDomainEntityToDataResponse(x));
         }
 
@@ -45,48 +47,10 @@ namespace ReactBank.Application.Services
                 Currency = domainEntity.Currency,
                 DateTime = domainEntity.DateTime.ToString("MMMM dd, yyyy HH:mm"),
                 DestinationAccount = $"{domainEntity.DestinationAccount.Customer.Name} - {domainEntity.DestinationAccountId}",
-                SourceAccount = $"{domainEntity.DestinationAccount.Customer.Name} - {domainEntity.SourceAccountId}",
+                SourceAccount = $"{domainEntity.SourceAccount.Customer.Name} - {domainEntity.SourceAccountId}",
                 TransactionType = domainEntity.TransactionType,
                 Id = domainEntity.Id
             };
         }
-
-        //public async Task<bool> TransferAsync(TransactionDataRequest dataRequest)
-        //{
-        //    using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-        //    {
-        //        var sourceAccount = await _unitOfWork.AccountRepository.GetByIdAsync(dataRequest.AccountId);
-        //        var targetAccount = await _unitOfWork.AccountRepository.GetByIdAsync(dataRequest.TargetAccountId);
-
-        //        if (sourceAccount == null || targetAccount == null)
-        //        {
-        //            return false;
-        //        }
-
-        //        sourceAccount.Balance -= dataRequest.Amount;
-        //        targetAccount.Balance += dataRequest.Amount;
-
-        //        await _unitOfWork.AccountRepository.UpdateAsync(sourceAccount);
-        //        await _unitOfWork.AccountRepository.UpdateAsync(targetAccount);
-
-        //        var transaction = new Transaction
-        //        {
-        //            AccountId = sourceAccount.Id,
-        //            Amount = dataRequest.Amount,
-        //            TransactionDate = DateTime.Now,
-        //            TransactionType = TransactionType.Transfer
-        //        };
-
-        //        await _unitOfWork.TransactionRepository.AddAsync(transaction);
-
-        //        if (await CommitAsync())
-        //        {
-        //            scope.Complete();
-        //            return true;
-        //        }
-
-        //        return false;
-        //    }
-        //}
     }
 }

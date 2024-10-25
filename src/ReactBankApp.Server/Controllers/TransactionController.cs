@@ -33,12 +33,5 @@ namespace ReactBankApp.Server.Controllers
 
             return Ok(transaction);
         }
-
-        [HttpPost]
-        public async Task<ActionResult<TransactionDataResponse>> Post([FromBody] TransactionDataRequest transactionDataRequest)
-        {
-            var transaction = await _transactionAppService.CreateAsync(transactionDataRequest);
-            return CreatedAtAction(nameof(Get), new { id = transaction.Id }, transaction);
-        }
     }
 }

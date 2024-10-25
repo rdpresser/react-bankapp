@@ -33,12 +33,5 @@ namespace ReactBankApp.Server.Controllers
 
             return Ok(loan);
         }
-
-        [HttpPost]
-        public async Task<ActionResult<LoanDataResponse>> Post([FromBody] LoanDataRequest loanDataRequest)
-        {
-            var loan = await _loanAppService.CreateAsync(loanDataRequest);
-            return CreatedAtAction(nameof(Get), new { id = loan.Id }, loan);
-        }
     }
 }

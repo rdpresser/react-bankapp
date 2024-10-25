@@ -35,21 +35,67 @@ namespace ReactBankApp.Server.Controllers
         }
 
         [HttpPost("withdraw")]
-        public IActionResult Withdraw()
+        public async Task<IActionResult> Withdraw(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
         {
-            return Ok();
+            if (makeWithdrawOperationDataRequest.AccountId == Guid.Empty || makeWithdrawOperationDataRequest.Amount <= 0)
+            {
+                return BadRequest("Invalid account ID or amount.");
+            }
+
+            try
+            {
+                await _operationAppService.MakeWithdrawal(makeWithdrawOperationDataRequest);
+                return Ok("Withdrawal successful.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost("transfer")]
-        public IActionResult Transfer()
+        public async Task<IActionResult> Transfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
         {
-            return Ok();
+            if (makeTransferOperationDataRequest.SourceAccountId == Guid.Empty ||
+                makeTransferOperationDataRequest.DestinationAccountId == Guid.Empty ||
+                makeTransferOperationDataRequest.Amount <= 0)
+            {
+                return BadRequest("Invalid source account ID, destination account ID, or amount.");
+            }
+
+            if (makeTransferOperationDataRequest.SourceAccountId == makeTransferOperationDataRequest.DestinationAccountId)
+            {
+                return BadRequest("Source account ID and destination account ID shouldn't be the same.");
+            }
+
+            try
+            {
+                await _operationAppService.MakeTransfer(makeTransferOperationDataRequest);
+                return Ok("Transfer successful.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpPost("loan")]
-        public IActionResult Loan()
+        public async Task<IActionResult> Loan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
         {
-            return Ok();
+            if (takeLoanOperationDataRequest.AccountId == Guid.Empty || takeLoanOperationDataRequest.Amount <= 0)
+            {
+                return BadRequest("Invalid account ID or amount.");
+            }
+
+            try
+            {
+                await _operationAppService.TakeLoan(takeLoanOperationDataRequest);
+                return Ok("Loan successful.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

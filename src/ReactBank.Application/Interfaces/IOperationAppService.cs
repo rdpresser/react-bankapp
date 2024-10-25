@@ -2,11 +2,11 @@
 
 namespace ReactBank.Application.Interfaces
 {
-    public interface IOperationAppService : IDisposable
+    public interface IOperationAppService
     {
         Task MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest);
-        //void MakeWithdrawal(Guid accountId, decimal amount);
-        //void MakeTransfer(Guid sourceAccountId, Guid destinationAccountId, decimal amount);
-        //void ContractLoan(Guid accountId, decimal amount);
+        Task MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest);
+        Task MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest);
+        Task TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest);
     }
 }

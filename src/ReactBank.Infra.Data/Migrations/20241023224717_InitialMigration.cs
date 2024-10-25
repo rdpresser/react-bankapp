@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -149,10 +148,10 @@ namespace ReactBank.Infra.Data.Migrations
                 name: "Loan");
 
             migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Account");
 
             migrationBuilder.DropTable(
-                name: "Account");
+                name: "Transaction");
 
             migrationBuilder.DropTable(
                 name: "Customer");

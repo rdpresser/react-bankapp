@@ -2,7 +2,7 @@
 
 namespace ReactBank.Application.DataContracts
 {
-    public class MakeDepositOperationDataRequest
+    public class MakeWithdrawOperationDataRequest
     {
         [RequiredGuidValidation]
         public Guid AccountId { get; set; }

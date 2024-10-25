@@ -2,10 +2,12 @@
 
 namespace ReactBank.Application.DataContracts
 {
-    public class MakeDepositOperationDataRequest
+    public class MakeTransferOperationDataRequest
     {
         [RequiredGuidValidation]
-        public Guid AccountId { get; set; }
+        public Guid SourceAccountId { get; set; }
+        [RequiredGuidValidation]
+        public Guid DestinationAccountId { get; set; }
         [RequiredValidation]
         public decimal Amount { get; set; }
     }

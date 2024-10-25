@@ -7,7 +7,6 @@ namespace ReactBank.Application.Services
 {
     public class OperationAppService : IOperationAppService
     {
-        private bool disposedValue;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOperationService _operationService;
 
@@ -19,33 +18,37 @@ namespace ReactBank.Application.Services
 
         public async Task MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest)
         {
-            Guid accountId = makeDepositOperationDataRequest.AccountId;
-            decimal amount = makeDepositOperationDataRequest.Amount;
+            (Guid accountId, decimal amount) = (makeDepositOperationDataRequest.AccountId, makeDepositOperationDataRequest.Amount);
 
             await _operationService.MakeDeposit(accountId, amount);
             await _unitOfWork.CommitAsync();
         }
 
-        protected virtual void Dispose(bool disposing)
+        public async Task MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
         {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: dispose managed state (managed objects)
-                }
+            (Guid sourceAccountId, Guid destinationAccountId, decimal amount) =
+                (makeTransferOperationDataRequest.SourceAccountId, makeTransferOperationDataRequest.DestinationAccountId, makeTransferOperationDataRequest.Amount);
 
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
-                disposedValue = true;
-            }
+            await _operationService.MakeTransfer(sourceAccountId, destinationAccountId, amount);
+            await _unitOfWork.CommitAsync();
         }
 
-        public void Dispose()
+        public async Task MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            (Guid accountId, decimal amount) = (makeWithdrawOperationDataRequest.AccountId, makeWithdrawOperationDataRequest.Amount);
+
+            await _operationService.MakeWithdrawal(accountId, amount);
+            await _unitOfWork.CommitAsync();
+        }
+
+        public async Task TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
+        {
+            (Guid accountId, decimal amount, DateTime startDate, DateTime endDate, decimal interestRate) =
+                (takeLoanOperationDataRequest.AccountId, takeLoanOperationDataRequest.Amount,
+                takeLoanOperationDataRequest.StartDate, takeLoanOperationDataRequest.EndDate, takeLoanOperationDataRequest.InterestRate);
+
+            await _operationService.TakeLoan(accountId, amount, startDate, endDate, interestRate);
+            await _unitOfWork.CommitAsync();
         }
     }
 }
