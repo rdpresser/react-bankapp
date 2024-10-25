@@ -12,8 +12,8 @@ using ReactBank.Infra.Data.Context;
 namespace ReactBank.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241024034647_SeedDatabase")]
-    partial class SeedDatabase
+    [Migration("20241025122612_SeedDataBase")]
+    partial class SeedDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

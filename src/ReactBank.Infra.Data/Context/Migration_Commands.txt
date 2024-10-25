@@ -23,6 +23,9 @@ Shell: dotnet ef migrations script -c ApplicationDbContext | out-file ./scriptFi
 PMC: Script-Migration <migration-name>
 PMC: Script-Migration -Project ReactBank.Infra.Data -StartupProject ReactBankApp.Server
 
+==>Command to revert migration with script
+Script-Migration -Project ReactBank.Infra.Data -StartupProject ReactBankApp.Server -From SeedDataBase -To InitialMigration
+
 ==> command to upgrade a specific database without having to change windows environment
 PMC: $env:ASPNETCORE_ENVIRONMENT="Development"
 
@@ -37,11 +40,11 @@ dotnet tool install --global dotnet-ef
 dotnet tool list
 
 
-SQL Server - Docker
+****SQL Server - Docker
 ==> Command to run a SQL Server on Docker
 docker run -e "ACCEPT_EULA=1" -e "MSSQL_SA_PASSWORD=MyPass@word" -e "MSSQL_PID=Developer" -e "MSSQL_USER=SA" -p 1433:1433 -d --name=sql mcr.microsoft.com/mssql/server
 
-==> Connection String = to be used on the appSettings config file
+==> Connection String => To be used on the appSettings config file
 ConnectionString
 "ConnectionStrings": {
   "DefaultConnection": "Data Source=localhost; Initial Catalog=Developer; User Id=sa; Password=MyPass@word"

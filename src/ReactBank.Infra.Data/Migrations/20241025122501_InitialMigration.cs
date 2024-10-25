@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -41,6 +42,7 @@ namespace ReactBank.Infra.Data.Migrations
                     Currency = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     AccountType = table.Column<string>(type: "varchar(2000)", unicode: false, maxLength: 2000, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -106,6 +108,16 @@ namespace ReactBank.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Account_AccountNumber",
+                table: "Account",
+                column: "AccountNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Account_CreatedAt",
+                table: "Account",
+                column: "CreatedAt");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Account_CustomerId",
                 table: "Account",
                 column: "CustomerId");
@@ -148,10 +160,10 @@ namespace ReactBank.Infra.Data.Migrations
                 name: "Loan");
 
             migrationBuilder.DropTable(
-                name: "Account");
+                name: "Transaction");
 
             migrationBuilder.DropTable(
-                name: "Transaction");
+                name: "Account");
 
             migrationBuilder.DropTable(
                 name: "Customer");

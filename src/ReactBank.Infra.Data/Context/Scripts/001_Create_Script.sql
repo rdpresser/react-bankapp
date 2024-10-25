@@ -34,6 +34,7 @@ CREATE TABLE [Account] (
     [Currency] varchar(2000) NOT NULL,
     [AccountType] varchar(2000) NOT NULL,
     [IsActive] bit NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
     [CustomerId] uniqueidentifier NOT NULL,
     CONSTRAINT [PK_Account] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Account_Customer_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([Id]) ON DELETE NO ACTION
@@ -66,6 +67,12 @@ CREATE TABLE [Transaction] (
 );
 GO
 
+CREATE INDEX [IX_Account_AccountNumber] ON [Account] ([AccountNumber]);
+GO
+
+CREATE INDEX [IX_Account_CreatedAt] ON [Account] ([CreatedAt]);
+GO
+
 CREATE INDEX [IX_Account_CustomerId] ON [Account] ([CustomerId]);
 GO
 
@@ -88,16 +95,13 @@ CREATE INDEX [IX_Transaction_SourceAccountId] ON [Transaction] ([SourceAccountId
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20241023224717_InitialMigration', N'8.0.10');
+VALUES (N'20241025122501_InitialMigration', N'8.0.10');
 GO
 
 COMMIT;
 GO
 
 BEGIN TRANSACTION;
-GO
-
-ALTER TABLE [Account] ADD [CreatedAt] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 GO
 
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'City', N'DateOfBirth', N'Email', N'IdentityDocument', N'IsActive', N'Name', N'Phone', N'State', N'StreetAddress', N'ZipCode') AND [object_id] = OBJECT_ID(N'[Customer]'))
@@ -120,14 +124,8 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Acco
     SET IDENTITY_INSERT [Account] OFF;
 GO
 
-CREATE INDEX [IX_Account_AccountNumber] ON [Account] ([AccountNumber]);
-GO
-
-CREATE INDEX [IX_Account_CreatedAt] ON [Account] ([CreatedAt]);
-GO
-
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20241024034647_SeedDatabase', N'8.0.10');
+VALUES (N'20241025122612_SeedDataBase', N'8.0.10');
 GO
 
 COMMIT;

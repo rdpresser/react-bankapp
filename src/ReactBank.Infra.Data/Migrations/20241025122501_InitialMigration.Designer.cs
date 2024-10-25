@@ -12,7 +12,7 @@ using ReactBank.Infra.Data.Context;
 namespace ReactBank.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241023224717_InitialMigration")]
+    [Migration("20241025122501_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -49,6 +49,9 @@ namespace ReactBank.Infra.Data.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasMaxLength(2000)
@@ -62,6 +65,10 @@ namespace ReactBank.Infra.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountNumber");
+
+                    b.HasIndex("CreatedAt");
 
                     b.HasIndex("CustomerId");
 
