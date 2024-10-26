@@ -5,6 +5,7 @@ namespace ReactBank.Domain.Interfaces.Repositores.Base
     public interface IBaseRepository<TEntity> : IDisposable where TEntity : BaseEntity
     {
         Task<TEntity> AddAsync(TEntity entity);
+        Task<bool> Exists(Guid id);
         Task<TEntity> GetByIdAsync(Guid id);
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> GetAllNoTracking();

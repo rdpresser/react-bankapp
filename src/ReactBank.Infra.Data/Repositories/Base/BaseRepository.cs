@@ -39,6 +39,11 @@ namespace ReactBank.Infra.Data.Repositories.Base
             return DbSet;
         }
 
+        public async Task<bool> Exists(Guid id)
+        {
+            return await DbSet.AnyAsync(e => e.Id == id);
+        }
+
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
             return await DbSet.FindAsync(id);

@@ -12,7 +12,7 @@ using ReactBank.Infra.Data.Context;
 namespace ReactBank.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241025122612_SeedDataBase")]
+    [Migration("20241026195453_SeedDataBase")]
     partial class SeedDataBase
     {
         /// <inheritdoc />
@@ -42,9 +42,7 @@ namespace ReactBank.Infra.Data.Migrations
 
                     b.Property<string>("AccountType")
                         .IsRequired()
-                        .HasMaxLength(2000)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(2000)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
@@ -79,7 +77,7 @@ namespace ReactBank.Infra.Data.Migrations
                         {
                             Id = new Guid("ba669725-8233-434a-9b1e-751dd752e419"),
                             AccountNumber = "123456789",
-                            AccountType = "Checking Account",
+                            AccountType = "CheckingAccount",
                             Balance = 1000m,
                             CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",
@@ -90,7 +88,7 @@ namespace ReactBank.Infra.Data.Migrations
                         {
                             Id = new Guid("ba769725-8233-434a-9b1e-751dd752e419"),
                             AccountNumber = "923456789",
-                            AccountType = "Saving Account",
+                            AccountType = "SavingsAccount",
                             Balance = 900m,
                             CreatedAt = new DateTime(2020, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",
@@ -101,7 +99,7 @@ namespace ReactBank.Infra.Data.Migrations
                         {
                             Id = new Guid("ba869725-8233-434a-9b1e-751dd752e419"),
                             AccountNumber = "823456789",
-                            AccountType = "Student Account",
+                            AccountType = "StudentAccount",
                             Balance = 850m,
                             CreatedAt = new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "US$",

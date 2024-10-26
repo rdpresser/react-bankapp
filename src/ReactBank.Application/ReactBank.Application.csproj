@@ -18,9 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Account\Queries\" />
-    <Folder Include="Customer\Commands\CreateCustomerCommand\" />
-    <Folder Include="Customer\Queries\" />
     <Folder Include="Loan\Commands\CreateLoanCommand\" />
     <Folder Include="Loan\Queries\" />
     <Folder Include="Operation\Commands\" />

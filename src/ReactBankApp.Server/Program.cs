@@ -25,11 +25,6 @@ namespace ReactBankApp.Server
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
 
-            //builder.Services.AddMediatR(configuration =>
-            //{
-            //    configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            //});
-
             builder.Services.AddValidatorsFromAssemblyContaining<AccountCommandValidation>();
 
             var app = builder.Build();

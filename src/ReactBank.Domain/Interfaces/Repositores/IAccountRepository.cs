@@ -6,7 +6,8 @@ namespace ReactBank.Domain.Interfaces.Repositores
     public interface IAccountRepository : IBaseRepository<Account>
     {
         Task<Account> GetByAccountNumberAsync(string accountNumber);
+        Task<bool> ExistsAccountNumberAsync(string accountNumber);
         Task<Account> GetByCustomerIdAsync(Guid customerId);
-        Task<Account> GetByAccountType(string accountType);
+        Task<Account> GetByAccountTypeAsync(string accountType);
     }
 }

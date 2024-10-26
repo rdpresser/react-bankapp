@@ -24,7 +24,7 @@ PMC: Script-Migration <migration-name>
 PMC: Script-Migration -Project ReactBank.Infra.Data -StartupProject ReactBankApp.Server
 
 ==>Command to revert migration with script
-Script-Migration -Project ReactBank.Infra.Data -StartupProject ReactBankApp.Server -From SeedDataBase -To InitialMigration
+Script-Migration -Project ReactBank.Infra.Data -StartupProject ReactBankApp.Server -From SeedDataBase -To 0
 
 ==> command to upgrade a specific database without having to change windows environment
 PMC: $env:ASPNETCORE_ENVIRONMENT="Development"

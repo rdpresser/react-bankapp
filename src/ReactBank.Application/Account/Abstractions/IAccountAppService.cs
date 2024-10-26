@@ -8,5 +8,9 @@ namespace ReactBank.Application.Account.Abstractions
     {
         CreateAccountCommand MapDataRequestToCommand(AccountDataRequest accountDataRequest);
         Task<Result<AccountDataResponse>> CreateAccountAsync(AccountDataRequest accountDataRequest);
+        Task<Result<bool>> Exists(Guid id);
+        Task<Result<bool>> ExistsAccountNumber(string accountNumber);
+        Task<Result<AccountDataResponse>> GetByIdAsync(Guid id);
+        Task<Result<IEnumerable<AccountDataResponse>>> GetAllAsync();
     }
 }

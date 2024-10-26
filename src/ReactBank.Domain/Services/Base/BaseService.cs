@@ -6,11 +6,11 @@ namespace ReactBank.Domain.Services.Base
 {
     public abstract class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
     {
-        private readonly IBaseRepository<TEntity> _baseRepository;
+        protected IBaseRepository<TEntity> BaseRepository { get; }
 
         protected BaseService(IBaseRepository<TEntity> baseRepository)
         {
-            _baseRepository = baseRepository ?? throw new ArgumentNullException(nameof(baseRepository), $"{nameof(baseRepository)} could not be null");
+            BaseRepository = baseRepository ?? throw new ArgumentNullException(nameof(baseRepository), $"{nameof(baseRepository)} could not be null");
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -19,27 +19,32 @@ namespace ReactBank.Domain.Services.Base
             {
                 entity.Id = Guid.NewGuid();
             }
-            return await _baseRepository.AddAsync(entity);
+            return await BaseRepository.AddAsync(entity);
+        }
+
+        public Task<bool> Exists(Guid id)
+        {
+            return BaseRepository.Exists(id);
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            return _baseRepository.GetAll();
+            return BaseRepository.GetAll();
         }
 
         public IQueryable<TEntity> GetAllNoTracking()
         {
-            return _baseRepository.GetAllNoTracking();
+            return BaseRepository.GetAllNoTracking();
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _baseRepository.GetByIdAsync(id);
+            return await BaseRepository.GetByIdAsync(id);
         }
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            return await _baseRepository.UpdateAsync(entity);
+            return await BaseRepository.UpdateAsync(entity);
         }
     }
 }

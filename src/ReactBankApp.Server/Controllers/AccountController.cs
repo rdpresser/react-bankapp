@@ -14,25 +14,41 @@ namespace ReactBankApp.Server.Controllers
             _accountAppService = accountAppService ?? throw new ArgumentNullException(nameof(accountAppService), $"{nameof(accountAppService)} could not be null");
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<AccountDataResponse>>> Get()
-        //{
-        //    var accounts = await _accountAppService.GetAllAsync();
-        //    return Ok(accounts);
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AccountDataResponse>>> Get()
+        {
+            var result = await _accountAppService.GetAllAsync();
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AccountDataResponse>> Get(Guid id)
         {
-            //var account = await _accountAppService.GetByIdAsync(id);
-            //if (account == null)
-            //{
-            //    return NotFound();
-            //}
+            var result = await _accountAppService.GetByIdAsync(id);
 
-            //return Ok(account);
-
-            return Ok();
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
 
         [HttpPost]
