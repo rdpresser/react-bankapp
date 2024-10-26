@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReactBank.Application.DataContracts;
-using ReactBank.Application.Interfaces;
+using ReactBank.Application.Account.Abstractions;
+using ReactBank.Application.Account.DataContracts;
 
 namespace ReactBankApp.Server.Controllers
 {
@@ -14,30 +14,45 @@ namespace ReactBankApp.Server.Controllers
             _accountAppService = accountAppService ?? throw new ArgumentNullException(nameof(accountAppService), $"{nameof(accountAppService)} could not be null");
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountDataResponse>>> Get()
-        {
-            var accounts = await _accountAppService.GetAllAsync();
-            return Ok(accounts);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<AccountDataResponse>>> Get()
+        //{
+        //    var accounts = await _accountAppService.GetAllAsync();
+        //    return Ok(accounts);
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AccountDataResponse>> Get(Guid id)
         {
-            var account = await _accountAppService.GetByIdAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
+            //var account = await _accountAppService.GetByIdAsync(id);
+            //if (account == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return Ok(account);
+            //return Ok(account);
+
+            return Ok();
         }
 
         [HttpPost]
         public async Task<ActionResult<AccountDataResponse>> Post([FromBody] AccountDataRequest accountDataRequest)
         {
-            var account = await _accountAppService.CreateAsync(accountDataRequest);
-            return CreatedAtAction(nameof(Get), new { id = account.Id }, account);
+            var result = await _accountAppService.CreateAccountAsync(accountDataRequest);
+
+            if (result.IsSuccess && result.Value != null)
+            {
+                return CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                //TODO: verify best way to return errors using problemdetails pattern
+                return BadRequest(result.Errors);
+            }
         }
     }
 }

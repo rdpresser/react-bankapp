@@ -1,5 +1,7 @@
 
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using ReactBank.Application.Account.Abstractions;
 using ReactBank.Infra.CrossCutting.IoC;
 using ReactBank.Infra.Data.Context;
 
@@ -20,6 +22,15 @@ namespace ReactBankApp.Server
 
             builder.Services.AddHttpContextAccessor();
             builder.Services.RegisterServices(builder.Configuration);
+
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+            //builder.Services.AddMediatR(configuration =>
+            //{
+            //    configuration.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            //});
+
+            builder.Services.AddValidatorsFromAssemblyContaining<AccountCommandValidation>();
 
             var app = builder.Build();
 

@@ -15,6 +15,10 @@ namespace ReactBank.Domain.Services.Base
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
+            if (entity.Id == Guid.Empty)
+            {
+                entity.Id = Guid.NewGuid();
+            }
             return await _baseRepository.AddAsync(entity);
         }
 

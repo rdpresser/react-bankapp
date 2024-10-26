@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ReactBank.Application.Interfaces;
-using ReactBank.Application.Services;
+using ReactBank.Application.Account.Abstractions;
+using ReactBank.Application.Account.Commands.CreateAccountCommand;
+using ReactBank.Application.Commons.Bases.Interfaces.Validations;
+using ReactBank.Application.Operation.Abstractions;
 using ReactBank.Domain.Interfaces.Repositores;
 using ReactBank.Domain.Interfaces.Repositores.Base;
 using ReactBank.Domain.Interfaces.Services;
@@ -47,9 +49,10 @@ namespace ReactBank.Infra.CrossCutting.IoC
         private static void RegisterApplication(IServiceCollection services)
         {
             services.AddScoped<IAccountAppService, AccountAppService>();
-            services.AddScoped<ICustomerAppService, CustomerAppService>();
-            services.AddScoped<ILoanAppService, LoanAppService>();
-            services.AddScoped<ITransactionAppService, TransactionAppService>();
+            services.AddScoped<IBaseValidation<CreateAccountCommand>, CreateAccountValidator>();
+            //services.AddScoped<ICustomerAppService, CustomerAppService>();
+            //services.AddScoped<ILoanAppService, LoanAppService>();
+            //services.AddScoped<ITransactionAppService, TransactionAppService>();
             services.AddScoped<IOperationAppService, OperationAppService>();
         }
     }

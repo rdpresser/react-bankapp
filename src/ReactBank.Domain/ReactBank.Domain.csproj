@@ -12,7 +12,8 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Validations\" />
-    <Folder Include="Validations\" />
+    <Folder Include="Validations\Account\" />
+    <Folder Include="Validations\Base\" />
   </ItemGroup>
 
   <ItemGroup>

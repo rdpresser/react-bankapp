@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using ReactBank.Domain.Enums;
 using ReactBank.Domain.Models;
 using ReactBank.Infra.Data.Context.Configurations.Base;
 
@@ -19,6 +21,8 @@ namespace ReactBank.Infra.Data.Context.Configurations
                 .IsRequired();
 
             builder.Property(x => x.AccountType)
+                .HasColumnType("varchar(100)")
+                .HasConversion(new EnumToStringConverter<AccountType>())
                 .IsRequired();
 
             builder.Property(x => x.Currency)
@@ -57,7 +61,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     AccountNumber = "123456789",
                     Balance = 1000,
                     Currency = "US$",
-                    AccountType = "Checking Account",
+                    AccountType = AccountType.CheckingAccount,
                     IsActive = true,
                     CustomerId = Guid.Parse("849b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                     CreatedAt = new DateTime(2021, 1, 1)
@@ -68,7 +72,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     AccountNumber = "923456789",
                     Balance = 900,
                     Currency = "US$",
-                    AccountType = "Saving Account",
+                    AccountType = AccountType.SavingsAccount,
                     IsActive = true,
                     CustomerId = Guid.Parse("889b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                     CreatedAt = new DateTime(2020, 2, 2)
@@ -79,7 +83,7 @@ namespace ReactBank.Infra.Data.Context.Configurations
                     AccountNumber = "823456789",
                     Balance = 850,
                     Currency = "US$",
-                    AccountType = "Student Account",
+                    AccountType = AccountType.StudentAccount,
                     IsActive = false,
                     CustomerId = Guid.Parse("888b24e4-f29a-4fb4-91b7-7a9b65795bf6"),
                     CreatedAt = new DateTime(2023, 3, 3)

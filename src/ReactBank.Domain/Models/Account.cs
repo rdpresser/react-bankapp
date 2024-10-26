@@ -1,4 +1,5 @@
 ﻿using ReactBank.Domain.Core.Models;
+using ReactBank.Domain.Enums;
 
 namespace ReactBank.Domain.Models
 {
@@ -7,7 +8,7 @@ namespace ReactBank.Domain.Models
         public string AccountNumber { get; set; }
         public decimal Balance { get; set; }
         public string Currency { get; set; } = "US$"; // Default value for "Currency
-        public string AccountType { get; set; } //Create enum for AccountType (Checking Account, Savings Account, Business Account, Joint Account, Investment Account, Student Account, Salary Account)
+        public AccountType AccountType { get; set; } //Create enum for AccountType (Checking Account, Savings Account, Business Account, Joint Account, Investment Account, Student Account, Salary Account)
         public bool IsActive { get; set; } = true; // Default value for "IsActive"
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Default value for "DateCreated"
 

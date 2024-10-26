@@ -14,7 +14,12 @@ namespace ReactBank.Infra.Data.UoW
 
         public async Task<bool> CommitAsync()
         {
-            var rowsAffected = await _context.SaveChangesAsync();
+            return await CommitAsync(cancellationToken: default);
+        }
+
+        public async Task<bool> CommitAsync(CancellationToken cancellationToken)
+        {
+            var rowsAffected = await _context.SaveChangesAsync(cancellationToken);
             return rowsAffected > 0;
         }
 
