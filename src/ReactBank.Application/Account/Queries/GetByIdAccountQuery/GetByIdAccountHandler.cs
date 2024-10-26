@@ -26,7 +26,8 @@ namespace ReactBank.Application.Account.Queries.GetByIdAccountQuery
                         AccountNumber: account.AccountNumber,
                         Balance: account.Balance,
                         Currency: account.Currency,
-                        AccountType: account.AccountType
+                        AccountType: account.AccountType,
+                        CustomerId: account.CustomerId
                     ));
                 }
                 return Result<AccountDataResponse>.Failure(new Dictionary<string, string> { { "GetByIdAccountQuery", "Account not found" } });

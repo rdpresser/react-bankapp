@@ -5,5 +5,6 @@ namespace ReactBank.Domain.Interfaces.Services
 {
     public interface ICustomerService : IBaseService<Customer>
     {
+        Task<IEnumerable<Customer>> GetAllAsync();
     }
 }

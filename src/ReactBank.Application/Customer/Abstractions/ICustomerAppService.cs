@@ -10,5 +10,6 @@ namespace ReactBank.Application.Customer.Abstractions
         Task<Result<CustomerDataResponse>> CreateCustomerAsync(CustomerDataRequest customerDataRequest);
         Task<Result<bool>> Exists(Guid id);
         Task<Result<CustomerDataResponse>> GetByIdAsync(Guid id);
+        Task<Result<IEnumerable<CustomerDataResponse>>> GetAllAsync();
     }
 }

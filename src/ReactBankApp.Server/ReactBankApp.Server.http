@@ -3,4 +3,25 @@
 GET {{ReactBankApp.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
+### GET ACCOUNT ###
+
+GET {{ReactBankApp.Server_HostAddress}}/api/account
+Content-Type: application/json
+
+### GET ACCOUNT BY ID###
+
+GET {{ReactBankApp.Server_HostAddress}}/api/account/ba669725-8233-434a-9b1e-751dd752e419
+Content-Type: application/json
+
+### POST ACCOUNT ###
+POST {{ReactBankApp.Server_HostAddress}}/api/account
+Content-Type: application/json
+{
+  "accountNumber": "123456789123",
+  "balance": 100,
+  "currency": "BRL",
+  "accountType": "SavingsAccount",
+  "customerId": "849b24e4-f29a-4fb4-91b7-7a9b65795bf6"
+}
+
 ###

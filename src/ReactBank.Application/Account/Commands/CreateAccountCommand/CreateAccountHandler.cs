@@ -47,7 +47,8 @@ namespace ReactBank.Application.Account.Commands.CreateAccountCommand
                     AccountNumber: account.AccountNumber,
                     Balance: account.Balance,
                     Currency: account.Currency,
-                    AccountType: account.AccountType
+                    AccountType: account.AccountType,
+                    CustomerId: account.CustomerId
                 ));
             }
             catch (Exception ex)

@@ -15,31 +15,60 @@ namespace ReactBankApp.Server.Controllers
             _customerAppService = customerAppService ?? throw new ArgumentNullException(nameof(customerAppService), $"{nameof(customerAppService)} could not be null");
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<CustomerDataResponse>>> Get()
-        //{
-        //    var customers = await _customerAppService.GetAllAsync();
-        //    return Ok(customers);
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CustomerDataResponse>>> Get()
+        {
+            var result = await _customerAppService.GetAllAsync();
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerDataResponse>> Get(Guid id)
         {
-            var customer = await _customerAppService.GetByIdAsync(id);
-            if (customer == null)
+            var result = await _customerAppService.GetByIdAsync(id);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
             {
                 return NotFound();
             }
-
-            return Ok(customer);
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<CustomerDataResponse>> Post([FromBody] CustomerDataRequest customerDataRequest)
-        //{
-        //    var customer = await _customerAppService.CreateAsync(customerDataRequest);
-        //    return CreatedAtAction(nameof(Get), new { id = customer.Id }, customer);
-        //}
+        [HttpPost]
+        public async Task<ActionResult<CustomerDataResponse>> Post([FromBody] CustomerDataRequest customerDataRequest)
+        {
+            var result = await _customerAppService.CreateCustomerAsync(customerDataRequest);
+
+            if (result.IsSuccess && result.Value != null)
+            {
+                return CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value);
+            }
+            else if (result.IsSuccess && result.Value == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
 
         //TODO: For future versions
         //[HttpPut("{id}")]

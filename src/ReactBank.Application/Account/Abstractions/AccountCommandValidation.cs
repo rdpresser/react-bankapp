@@ -41,33 +41,33 @@ namespace ReactBank.Application.Account.Abstractions
         protected void ValidateAccountNumber()
         {
             RuleFor(x => x.AccountNumber)
-                .NotEmpty()
-                .MaximumLength(50);
+                .NotEmpty().WithMessage("Account number must not be empty")
+                .MaximumLength(50).WithMessage("Account number must not exceed 50 characters");
         }
 
         protected void ValidateBalance()
         {
             RuleFor(x => x.Balance)
-                .GreaterThanOrEqualTo(0);
+                .GreaterThanOrEqualTo(0).WithMessage("Balance must be greater than or equal to 0");
         }
 
         protected void ValidateCustomerId()
         {
             RuleFor(x => x.CustomerId)
-                .NotEmpty();
+                .NotEmpty().WithMessage("Customer ID must not be empty");
         }
 
         protected void ValidateCurrency()
         {
             RuleFor(x => x.Currency)
-                .NotEmpty()
-                .MaximumLength(3);
+                .NotEmpty().WithMessage("Currency must not be empty")
+                .MaximumLength(3).WithMessage("Currency must not exceed 3 characters");
         }
 
         protected void ValidateAccountType()
         {
             RuleFor(x => x.AccountType)
-                .IsInEnum();
+                .IsInEnum().WithMessage("Invalid account type");
         }
     }
 }

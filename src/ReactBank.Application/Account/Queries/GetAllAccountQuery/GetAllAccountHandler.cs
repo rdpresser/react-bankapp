@@ -5,14 +5,9 @@ using ReactBank.Domain.Interfaces.Services;
 
 namespace ReactBank.Application.Account.Queries.GetAllAccountQuery
 {
-    public class GetAllAccountHandler : IRequestHandler<GetAllAccountQuery, Result<IEnumerable<AccountDataResponse>>>
+    public class GetAllAccountHandler(IAccountService accountService) : IRequestHandler<GetAllAccountQuery, Result<IEnumerable<AccountDataResponse>>>
     {
-        private readonly IAccountService _accountService;
-
-        public GetAllAccountHandler(IAccountService accountService)
-        {
-            _accountService = accountService;
-        }
+        private readonly IAccountService _accountService = accountService;
 
         public async Task<Result<IEnumerable<AccountDataResponse>>> Handle(GetAllAccountQuery request, CancellationToken cancellationToken)
         {
@@ -26,7 +21,8 @@ namespace ReactBank.Application.Account.Queries.GetAllAccountQuery
                         AccountNumber: account.AccountNumber,
                         Balance: account.Balance,
                         Currency: account.Currency,
-                        AccountType: account.AccountType
+                        AccountType: account.AccountType,
+                        CustomerId: account.CustomerId
                     )));
                 }
                 return Result<IEnumerable<AccountDataResponse>>.Failure(new Dictionary<string, string> { { "GetAllAccountQuery", "No accounts found" } });

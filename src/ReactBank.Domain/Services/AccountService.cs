@@ -6,15 +6,9 @@ using ReactBank.Domain.Services.Base;
 
 namespace ReactBank.Domain.Services
 {
-    public class AccountService : BaseService<Account>, IAccountService
+    public class AccountService(IAccountRepository baseRepository) : BaseService<Account>(baseRepository), IAccountService
     {
-        private readonly IAccountRepository _accountRepository;
-
-        public AccountService(IAccountRepository baseRepository)
-            : base(baseRepository)
-        {
-            _accountRepository = baseRepository;
-        }
+        private readonly IAccountRepository _accountRepository = baseRepository;
 
         public async Task<bool> ExistsAccountNumberAsync(string accountNumber)
         {

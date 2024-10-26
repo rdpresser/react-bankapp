@@ -16,6 +16,7 @@ namespace ReactBank.Application.Account.DataContracts
         string AccountNumber,
         decimal Balance,
         string Currency,
-        AccountType AccountType
+        AccountType AccountType,
+        Guid CustomerId
     );
 }
