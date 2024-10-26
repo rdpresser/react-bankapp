@@ -22,7 +22,7 @@ namespace ReactBankApp.Server.Controllers
             {
                 return Ok(result.Value);
             }
-            else if (result.IsSuccess && result.Value == null)
+            else if (result.IsNotFound)
             {
                 return NotFound();
             }
@@ -41,7 +41,7 @@ namespace ReactBankApp.Server.Controllers
             {
                 return Ok(result.Value);
             }
-            else if (result.IsSuccess && result.Value == null)
+            else if (result.IsNotFound)
             {
                 return NotFound();
             }
@@ -60,7 +60,7 @@ namespace ReactBankApp.Server.Controllers
             {
                 return CreatedAtAction(nameof(Get), new { id = result.Value.Id }, result.Value);
             }
-            else if (result.IsSuccess && result.Value == null)
+            else if (result.IsNotFound)
             {
                 return NotFound();
             }

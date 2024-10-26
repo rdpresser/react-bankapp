@@ -35,7 +35,7 @@ namespace ReactBank.Application.Customer.Queries.GetAllCustomerQuery
                     )));
                 }
 
-                return Result<IEnumerable<CustomerDataResponse>>.Failure(new Dictionary<string, string> { { "GetAllCustomerQuery", "No customers found" } });
+                return Result<IEnumerable<CustomerDataResponse>>.NotFound(new Dictionary<string, string> { { "GetAllCustomerQuery", "No customers found" } });
             }
             catch (Exception ex)
             {

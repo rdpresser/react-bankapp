@@ -22,7 +22,7 @@ namespace ReactBank.Application.Account.Queries.GetByIdExistsAccountQuery
                 {
                     return Result<bool>.Success(true);
                 }
-                return Result<bool>.Failure(new Dictionary<string, string> { { "GetByIdExistsAccountQuery", "Account not found" } });
+                return Result<bool>.NotFound(new Dictionary<string, string> { { "GetByIdExistsAccountQuery", "Account not found" } });
             }
             catch (Exception ex)
             {

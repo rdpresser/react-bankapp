@@ -25,7 +25,7 @@ namespace ReactBank.Application.Account.Queries.GetAllAccountQuery
                         CustomerId: account.CustomerId
                     )));
                 }
-                return Result<IEnumerable<AccountDataResponse>>.Failure(new Dictionary<string, string> { { "GetAllAccountQuery", "No accounts found" } });
+                return Result<IEnumerable<AccountDataResponse>>.NotFound(new Dictionary<string, string> { { "GetAllAccountQuery", "No accounts found" } });
             }
             catch (Exception ex)
             {

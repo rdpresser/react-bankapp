@@ -3,7 +3,7 @@
 GET {{ReactBankApp.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
-### GET ACCOUNT ###
+### GET ACCOUNT LIST###
 
 GET {{ReactBankApp.Server_HostAddress}}/api/account
 Content-Type: application/json
@@ -24,4 +24,10 @@ Content-Type: application/json
   "customerId": "849b24e4-f29a-4fb4-91b7-7a9b65795bf6"
 }
 
-###
+### GET CUSTOMER LIST###
+GET {{ReactBankApp.Server_HostAddress}}/api/customer
+Content-Type: application/json
+
+### GET CUSTOMER BY ID ###
+GET {{ReactBankApp.Server_HostAddress}}/api/customer/849b24e4-f29a-4fb4-91b7-7a9b65795bf6
+Content-Type: application/json
