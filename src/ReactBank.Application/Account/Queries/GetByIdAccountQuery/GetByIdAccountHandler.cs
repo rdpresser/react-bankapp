@@ -30,11 +30,11 @@ namespace ReactBank.Application.Account.Queries.GetByIdAccountQuery
                         CustomerId: account.CustomerId
                     ));
                 }
-                return Result<AccountDataResponse>.NotFound(new Dictionary<string, string> { { "GetByIdAccountQuery", "Account not found" } });
+                return Result<AccountDataResponse>.NotFound(new Dictionary<string, string[]> { { "GetByIdAccountQuery", ["Account not found"] } });
             }
             catch (Exception ex)
             {
-                return Result<AccountDataResponse>.Failure(new Dictionary<string, string> { { "GetByIdAccountQuery", ex.Message } });
+                return Result<AccountDataResponse>.Failure(new Dictionary<string, string[]> { { "GetByIdAccountQuery", [ex.Message] } });
             }
         }
     }

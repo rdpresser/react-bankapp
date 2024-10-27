@@ -1,16 +1,6 @@
 ﻿namespace ReactBank.Application.Operation
 {
     /// <summary>
-    /// Make a deposit operation
-    /// </summary>
-    /// <param name="AccountId"></param>
-    /// <param name="Amount"></param>
-    public record MakeDepositOperationCommand(
-        Guid AccountId,
-        decimal Amount
-    );
-
-    /// <summary>
     /// Make a transfer operation
     /// </summary>
     /// <param name="SourceAccountId"></param>

@@ -22,11 +22,11 @@ namespace ReactBank.Application.Account.Queries.GetByAccountNumberAccountQuery
                 {
                     return Result<bool>.Success(true);
                 }
-                return Result<bool>.NotFound(new Dictionary<string, string> { { "GetByAccountNumberAccountQuery", "Account not found" } });
+                return Result<bool>.NotFound(new Dictionary<string, string[]> { { "GetByAccountNumberAccountQuery", ["Account not found"] } });
             }
             catch (Exception ex)
             {
-                return Result<bool>.Failure(new Dictionary<string, string> { { "GetByAccountNumberAccountQuery", ex.Message } });
+                return Result<bool>.Failure(new Dictionary<string, string[]> { { "GetByAccountNumberAccountQuery", [ex.Message] } });
             }
         }
     }

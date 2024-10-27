@@ -21,7 +21,7 @@ namespace ReactBank.Application.Customer.Queries.GetByIdCustomerQuery
                 var customer = await _customerService.GetByIdAsync(request.Id);
                 if (customer == null)
                 {
-                    return Result<CustomerDataResponse>.NotFound(new Dictionary<string, string> { { "GetByIdCustomerQuery", "Customer not found" } });
+                    return Result<CustomerDataResponse>.NotFound(new Dictionary<string, string[]> { { "GetByIdCustomerQuery", ["Customer not found"] } });
                 }
 
                 return Result<CustomerDataResponse>.Success(new CustomerDataResponse(
@@ -39,7 +39,7 @@ namespace ReactBank.Application.Customer.Queries.GetByIdCustomerQuery
             }
             catch (Exception ex)
             {
-                return Result<CustomerDataResponse>.Failure(new Dictionary<string, string> { { "GetByIdCustomerQuery", ex.Message } });
+                return Result<CustomerDataResponse>.Failure(new Dictionary<string, string[]> { { "GetByIdCustomerQuery", [ex.Message] } });
             }
         }
     }

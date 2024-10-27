@@ -27,7 +27,7 @@ namespace ReactBank.Application.Customer.Commands.CreateCustomerCommand
                 var result = await _validator.IsValidAsync(request);
                 if (!result.IsValid)
                 {
-                    return Result<CustomerDataResponse>.Failure(_validator.Errors(result));
+                    return Result<CustomerDataResponse>.Failure(result.ToDictionary());
                 }
 
                 var customer = new Domain.Models.Customer
@@ -61,7 +61,7 @@ namespace ReactBank.Application.Customer.Commands.CreateCustomerCommand
             }
             catch (Exception ex)
             {
-                return Result<CustomerDataResponse>.Failure(new Dictionary<string, string> { { "CreateCustomerCommand", ex.Message } });
+                return Result<CustomerDataResponse>.Failure(new Dictionary<string, string[]> { { "CreateCustomerCommand", [ex.Message] } });
             }
         }
     }

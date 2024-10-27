@@ -27,7 +27,7 @@ namespace ReactBank.Application.Account.Commands.CreateAccountCommand
                 var result = await _validator.IsValidAsync(request);
                 if (!result.IsValid)
                 {
-                    return Result<AccountDataResponse>.Failure(_validator.Errors(result));
+                    return Result<AccountDataResponse>.Failure(result.ToDictionary());
                 }
 
                 var account = new Domain.Models.Account
@@ -54,7 +54,7 @@ namespace ReactBank.Application.Account.Commands.CreateAccountCommand
             catch (Exception ex)
             {
                 //Create extension 
-                return Result<AccountDataResponse>.Failure(new Dictionary<string, string> { { "CreateAccountCommand", ex.Message } });
+                return Result<AccountDataResponse>.Failure(new Dictionary<string, string[]> { { "CreateAccountCommand", [ex.Message] } });
             }
         }
     }

@@ -22,11 +22,11 @@ namespace ReactBank.Application.Customer.Queries.GetByIdExistsCustomerQuery
                 {
                     return Result<bool>.Success(true);
                 }
-                return Result<bool>.NotFound(new Dictionary<string, string> { { "GetByIdExistsCustomerQuery", "Customer not found" } });
+                return Result<bool>.NotFound(new Dictionary<string, string[]> { { "GetByIdExistsCustomerQuery", ["Customer not found"] } });
             }
             catch (Exception ex)
             {
-                return Result<bool>.Failure(new Dictionary<string, string> { { "GetByIdExistsCustomerQuery", ex.Message } });
+                return Result<bool>.Failure(new Dictionary<string, string[]> { { "GetByIdExistsCustomerQuery", [ex.Message] } });
             }
         }
     }

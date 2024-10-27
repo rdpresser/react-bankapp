@@ -7,6 +7,6 @@ namespace ReactBank.Application.Commons.Bases.Interfaces.Validations
     {
         ValidationResult IsValid(TCommand entity);
         Task<ValidationResult> IsValidAsync(TCommand entity);
-        Dictionary<string, string> Errors(ValidationResult validationResult);
+        IDictionary<string, string[]> Errors(ValidationResult validationResult);
     }
 }

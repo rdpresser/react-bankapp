@@ -55,34 +55,34 @@ namespace ReactBank.Domain.Services
             await _loanService.AddAsync(loan);
         }
 
-        public async Task MakeDeposit(Guid accountId, decimal amount)
-        {
-            if (amount <= 0)
-            {
-                throw new ArgumentException("Deposit amount must be greater than zero.", nameof(amount));
-            }
+        //public async Task MakeDeposit(Guid accountId, decimal amount)
+        //{
+        //    if (amount <= 0)
+        //    {
+        //        throw new ArgumentException("Deposit amount must be greater than zero.", nameof(amount));
+        //    }
 
-            var account = await _accountService.GetByIdAsync(accountId);
-            if (account == null)
-            {
-                throw new InvalidOperationException("Account not found.");
-            }
+        //    var account = await _accountService.GetByIdAsync(accountId);
+        //    if (account == null)
+        //    {
+        //        throw new InvalidOperationException("Account not found.");
+        //    }
 
-            account.Balance += amount;
+        //    account.Balance += amount;
 
-            var transaction = new Transaction
-            {
-                TransactionType = "Deposit",
-                Amount = amount,
-                Currency = account.Currency,
-                DateTime = DateTime.UtcNow,
-                SourceAccountId = accountId,
-                DestinationAccountId = accountId
-            };
+        //    var transaction = new Transaction
+        //    {
+        //        TransactionType = "Deposit",
+        //        Amount = amount,
+        //        Currency = account.Currency,
+        //        DateTime = DateTime.UtcNow,
+        //        SourceAccountId = accountId,
+        //        DestinationAccountId = accountId
+        //    };
 
-            await _transactionService.AddAsync(transaction);
-            await _accountService.UpdateAsync(account);
-        }
+        //    await _transactionService.AddAsync(transaction);
+        //    await _accountService.UpdateAsync(account);
+        //}
 
         public async Task MakeTransfer(Guid sourceAccountId, Guid destinationAccountId, decimal amount)
         {
