@@ -5,6 +5,8 @@ using ReactBank.Application.Account.Commands.CreateAccountCommand;
 using ReactBank.Application.Commons.Bases.Interfaces.Validations;
 using ReactBank.Application.Customer.Abstractions;
 using ReactBank.Application.Customer.Commands.CreateCustomerCommand;
+using ReactBank.Application.Loan.Abstractions;
+using ReactBank.Application.Loan.Commands.CreateLoanCommand;
 using ReactBank.Application.Operation.Abstractions;
 using ReactBank.Application.Operation.Commands.MakeDepositOperationCommand;
 using ReactBank.Application.Operation.Commands.MakeTransferOperationCommand;
@@ -61,9 +63,10 @@ namespace ReactBank.Infra.CrossCutting.IoC
             services.AddScoped<IBaseValidation<MakeTransferOperationCommand>, MakeTransferOperationValidator>();
             services.AddScoped<IBaseValidation<MakeDepositOperationCommand>, MakeDepositOperationValidator>();
             services.AddScoped<IBaseValidation<MakeWithdrawOperationCommand>, MakeWithdrawOperationValidator>();
+            services.AddScoped<IBaseValidation<CreateLoanCommand>, CreateLoanValidator>();
 
             services.AddScoped<ICustomerAppService, CustomerAppService>();
-            //services.AddScoped<ILoanAppService, LoanAppService>();
+            services.AddScoped<ILoanAppService, LoanAppService>();
             services.AddScoped<ITransactionAppService, TransactionAppService>();
             services.AddScoped<IOperationAppService, OperationAppService>();
         }

@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Loan\Commands\CreateLoanCommand\" />
-    <Folder Include="Loan\Queries\" />
+    <Folder Include="Loan\Queries\GetAllLoanQuery\" />
+    <Folder Include="Loan\Queries\GetByIdLoanQuery\" />
   </ItemGroup>
 
 </Project>
