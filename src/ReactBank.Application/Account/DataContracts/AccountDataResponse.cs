@@ -13,6 +13,7 @@ namespace ReactBank.Application.Account.DataContracts
     public record AccountDataResponse
     (
         Guid Id,
+        string CustomerName,
         string AccountNumber,
         decimal Balance,
         string Currency,

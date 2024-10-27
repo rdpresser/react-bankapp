@@ -14,8 +14,9 @@ function Account() {
             <thead>
                 <tr>
                     <th>Account Number</th>
-                    <th>Balance</th>
+                    <th>Customer Name</th>
                     <th>Currency</th>
+                    <th>Balance</th>
                     <th>Account Type</th>
                 </tr>
             </thead>
@@ -23,8 +24,9 @@ function Account() {
                 {data.map(item =>
                     <tr key={item.id}>
                         <td>{item.accountNumber}</td>
-                        <td>{item.balance}</td>
+                        <td>{item.customerName}</td>
                         <td>{item.currency}</td>
+                        <td>{item.balance}</td>
                         <td>{item.accountType}</td>
                     </tr>
                 )}

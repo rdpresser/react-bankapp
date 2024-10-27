@@ -18,6 +18,7 @@ namespace ReactBank.Application.Account.Queries.GetAllAccountQuery
                 {
                     return Result<IEnumerable<AccountDataResponse>>.Success(accounts.Select(account => new AccountDataResponse(
                         Id: account.Id,
+                        CustomerName: account.Customer.Name,
                         AccountNumber: account.AccountNumber,
                         Balance: account.Balance,
                         Currency: account.Currency,

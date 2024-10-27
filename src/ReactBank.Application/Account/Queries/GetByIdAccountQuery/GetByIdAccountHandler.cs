@@ -23,6 +23,7 @@ namespace ReactBank.Application.Account.Queries.GetByIdAccountQuery
                 {
                     return Result<AccountDataResponse>.Success(new AccountDataResponse(
                         Id: account.Id,
+                        CustomerName: account.Customer.Name,
                         AccountNumber: account.AccountNumber,
                         Balance: account.Balance,
                         Currency: account.Currency,
