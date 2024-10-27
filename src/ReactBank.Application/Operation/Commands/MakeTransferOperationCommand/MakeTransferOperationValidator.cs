@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ReactBank.Application.Commons.Bases.Interfaces.Validations;
+using ReactBank.Application.Operation.Abstractions;
 
 namespace ReactBank.Application.Operation.Commands.MakeTransferOperationCommand
 {
-    internal class MakeTransferOperationValidator
+    public class MakeTransferOperationValidator : MakeTransferOperationValidation, IBaseValidation<MakeTransferOperationCommand>
     {
+        public MakeTransferOperationValidator()
+        {
+            ValidateSourceAccountId();
+            ValidateDestinationAccountId();
+            ValidateAmount();
+            ValidateSourceAndDestinationAccounts();
+        }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using MediatR;
 using ReactBank.Application.Operation.Commands.MakeDepositOperationCommand;
+using ReactBank.Application.Operation.Commands.MakeTransferOperationCommand;
+using ReactBank.Application.Operation.Commands.MakeWithdrawOperationCommand;
+using ReactBank.Application.Operation.Commands.TakeLoanOperationCommand;
 using ReactBank.Application.Operation.DataContracts;
 using ReactBank.Domain.Core.Notifications;
 
@@ -14,7 +17,7 @@ namespace ReactBank.Application.Operation.Abstractions
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator), $"{nameof(mediator)} could not be null");
         }
 
-        public async Task<Result<Guid>> MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest)
+        public async Task<Result<DefaultOperationDataResponse>> MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest)
         {
             var command = new MakeDepositOperationCommand(
                 makeDepositOperationDataRequest.AccountId,
@@ -24,24 +27,38 @@ namespace ReactBank.Application.Operation.Abstractions
             return await _mediator.Send(command);
         }
 
-        public async Task MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
+        public async Task<Result<DefaultOperationDataResponse>> MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
         {
-            (Guid sourceAccountId, Guid destinationAccountId, decimal amount) =
-                (makeTransferOperationDataRequest.SourceAccountId, makeTransferOperationDataRequest.DestinationAccountId, makeTransferOperationDataRequest.Amount);
+            var command = new MakeTransferOperationCommand(
+                makeTransferOperationDataRequest.SourceAccountId,
+                makeTransferOperationDataRequest.DestinationAccountId,
+                makeTransferOperationDataRequest.Amount
+            );
 
+            return await _mediator.Send(command);
         }
 
-        public async Task MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
+        public async Task<Result<DefaultOperationDataResponse>> MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
         {
-            (Guid accountId, decimal amount) = (makeWithdrawOperationDataRequest.AccountId, makeWithdrawOperationDataRequest.Amount);
+            var command = new MakeWithdrawOperationCommand(
+                makeWithdrawOperationDataRequest.AccountId,
+                makeWithdrawOperationDataRequest.Amount
+            );
 
+            return await _mediator.Send(command);
         }
 
-        public async Task TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
+        public async Task<Result<DefaultOperationDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
         {
-            (Guid accountId, decimal amount, DateTime startDate, DateTime endDate, decimal interestRate) =
-                (takeLoanOperationDataRequest.AccountId, takeLoanOperationDataRequest.Amount,
-                takeLoanOperationDataRequest.StartDate, takeLoanOperationDataRequest.EndDate, takeLoanOperationDataRequest.InterestRate);
+            var command = new TakeLoanOperationCommand(
+                takeLoanOperationDataRequest.AccountId,
+                takeLoanOperationDataRequest.Amount,
+                takeLoanOperationDataRequest.InterestRate,
+                takeLoanOperationDataRequest.StartDate,
+                takeLoanOperationDataRequest.EndDate
+            );
+
+            return await _mediator.Send(command);
         }
     }
 }

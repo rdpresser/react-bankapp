@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ReactBank.Application.Operation.DataContracts;
 using ReactBank.Domain.Core.Notifications;
 
 namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
@@ -11,5 +12,5 @@ namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
     public record MakeDepositOperationCommand(
         Guid AccountId,
         decimal Amount
-    ) : IRequest<Result<Guid>>;
+    ) : IRequest<Result<DefaultOperationDataResponse>>;
 }

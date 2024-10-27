@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using ReactBank.Application.Operation.DataContracts;
+using ReactBank.Domain.Core.Notifications;
 
 namespace ReactBank.Application.Operation.Commands.TakeLoanOperationCommand
 {
-    internal class TakeLoanOperationCommand
-    {
-    }
+    /// <summary>
+    /// Take a loan operation
+    /// </summary>
+    /// <param name="AccountId"></param>
+    /// <param name="Amount"></param>
+    /// <param name="InterestRate"></param>
+    /// <param name="StartDate"></param>
+    /// <param name="EndDate"></param>
+    public record TakeLoanOperationCommand(
+        Guid AccountId,
+        decimal Amount,
+        decimal InterestRate,
+        DateTime StartDate,
+        DateTime EndDate
+    ) : IRequest<Result<DefaultOperationDataResponse>>;
 }

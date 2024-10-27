@@ -5,9 +5,9 @@ namespace ReactBank.Application.Operation.Abstractions
 {
     public interface IOperationAppService
     {
-        Task<Result<Guid>> MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest);
-        Task MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest);
-        Task MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest);
-        Task TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest);
+        Task<Result<DefaultOperationDataResponse>> MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest);
+        Task<Result<DefaultOperationDataResponse>> MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest);
+        Task<Result<DefaultOperationDataResponse>> MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest);
+        Task<Result<DefaultOperationDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest);
     }
 }

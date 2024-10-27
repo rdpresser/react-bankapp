@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using ReactBank.Application.Commons.Bases.Interfaces.Validations;
+using ReactBank.Application.Operation.DataContracts;
 using ReactBank.Domain.Core.Notifications;
 using ReactBank.Domain.Interfaces.Repositores;
 using ReactBank.Domain.Interfaces.Services;
 
 namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
 {
-    public class MakeDepositOperationHandler : IRequestHandler<MakeDepositOperationCommand, Result<Guid>>
+    public class MakeDepositOperationHandler : IRequestHandler<MakeDepositOperationCommand, Result<DefaultOperationDataResponse>>
     {
         private readonly IAccountService _accountService;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,14 +22,14 @@ namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
             _validator = validator;
         }
 
-        public async Task<Result<Guid>> Handle(MakeDepositOperationCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DefaultOperationDataResponse>> Handle(MakeDepositOperationCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var result = await _validator.IsValidAsync(request);
                 if (!result.IsValid)
                 {
-                    return Result<Guid>.Failure(result.ToDictionary());
+                    return Result<DefaultOperationDataResponse>.Failure(result.ToDictionary());
                 }
 
                 (Guid accountId, decimal amount) = (request.AccountId, request.Amount);
@@ -36,7 +37,7 @@ namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
                 var account = await _accountService.GetByIdAsync(accountId);
                 if (account == null)
                 {
-                    return Result<Guid>.Failure(new Dictionary<string, string[]> { { "MakeDepositOperationCommand", ["Account not found"] } });
+                    return Result<DefaultOperationDataResponse>.Failure(new Dictionary<string, string[]> { { "MakeDepositOperationCommand", ["Account not found"] } });
                 }
 
                 account.Balance += amount;
@@ -51,15 +52,15 @@ namespace ReactBank.Application.Operation.Commands.MakeDepositOperationCommand
                     DestinationAccountId = accountId
                 };
 
-                await _transactionService.AddAsync(transaction);
+                var newTransaction = await _transactionService.AddAsync(transaction);
                 await _accountService.UpdateAsync(account);
                 await _unitOfWork.CommitAsync();
 
-                return Result<Guid>.Success(account.Id);
+                return Result<DefaultOperationDataResponse>.Success(new DefaultOperationDataResponse(newTransaction.Id));
             }
             catch (Exception ex)
             {
-                return Result<Guid>.Failure(new Dictionary<string, string[]> { { "MakeDepositOperationCommand", [ex.Message] } });
+                return Result<DefaultOperationDataResponse>.Failure(new Dictionary<string, string[]> { { "MakeDepositOperationCommand", [ex.Message] } });
             }
         }
     }

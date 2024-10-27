@@ -16,12 +16,12 @@ namespace ReactBankApp.Server.Controllers
         }
 
         [HttpPost("deposit")]
-        public async Task<IActionResult> Deposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest)
+        public async Task<ActionResult> Deposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest)
         {
             var result = await _operationAppService.MakeDeposit(makeDepositOperationDataRequest);
-            if (result.IsSuccess && result.Value != Guid.Empty)
+            if (result.IsSuccess && result.Value != null)
             {
-                return Ok(result.Value);
+                return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.Id }, result.Value);
             }
             else if (result.IsNotFound)
             {
@@ -34,52 +34,43 @@ namespace ReactBankApp.Server.Controllers
         }
 
         //[HttpPost("withdraw")]
-        //public async Task<IActionResult> Withdraw(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
+        //public async Task<ActionResult> Withdraw(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
         //{
-        //    if (makeWithdrawOperationDataRequest.AccountId == Guid.Empty || makeWithdrawOperationDataRequest.Amount <= 0)
+        //    var result = await _operationAppService.MakeWithdrawal(makeWithdrawOperationDataRequest);
+        //    if (result.IsSuccess && result.Value != null)
         //    {
-        //        return BadRequest("Invalid account ID or amount.");
+        //        return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.Id }, result.Value);
         //    }
-
-        //    try
+        //    else if (result.IsNotFound)
         //    {
-        //        await _operationAppService.MakeWithdrawal(makeWithdrawOperationDataRequest);
-        //        return Ok("Withdrawal successful.");
+        //        return NotFound();
         //    }
-        //    catch (Exception ex)
+        //    else
         //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
+        //        return BadRequest(result.Errors);
         //    }
         //}
 
-        //[HttpPost("transfer")]
-        //public async Task<IActionResult> Transfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
-        //{
-        //    if (makeTransferOperationDataRequest.SourceAccountId == Guid.Empty ||
-        //        makeTransferOperationDataRequest.DestinationAccountId == Guid.Empty ||
-        //        makeTransferOperationDataRequest.Amount <= 0)
-        //    {
-        //        return BadRequest("Invalid source account ID, destination account ID, or amount.");
-        //    }
-
-        //    if (makeTransferOperationDataRequest.SourceAccountId == makeTransferOperationDataRequest.DestinationAccountId)
-        //    {
-        //        return BadRequest("Source account ID and destination account ID shouldn't be the same.");
-        //    }
-
-        //    try
-        //    {
-        //        await _operationAppService.MakeTransfer(makeTransferOperationDataRequest);
-        //        return Ok("Transfer successful.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
-        //    }
-        //}
+        [HttpPost("transfer")]
+        public async Task<ActionResult> Transfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
+        {
+            var result = await _operationAppService.MakeTransfer(makeTransferOperationDataRequest);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.Id }, result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
 
         //[HttpPost("loan")]
-        //public async Task<IActionResult> Loan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
+        //public async Task<ActionResult> Loan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
         //{
         //    if (takeLoanOperationDataRequest.AccountId == Guid.Empty || takeLoanOperationDataRequest.Amount <= 0)
         //    {
