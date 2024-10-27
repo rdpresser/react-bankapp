@@ -20,8 +20,6 @@
   <ItemGroup>
     <Folder Include="Loan\Commands\CreateLoanCommand\" />
     <Folder Include="Loan\Queries\" />
-    <Folder Include="Transaction\Commands\" />
-    <Folder Include="Transaction\Queries\" />
   </ItemGroup>
 
 </Project>

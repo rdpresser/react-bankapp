@@ -131,38 +131,38 @@ namespace ReactBank.Domain.Services
         //    await _accountService.UpdateAsync(destinationAccount);
         //}
 
-        public async Task MakeWithdrawal(Guid accountId, decimal amount)
-        {
-            if (amount <= 0)
-            {
-                throw new ArgumentException("Withdrawal amount must be greater than zero.", nameof(amount));
-            }
+        //public async Task MakeWithdrawal(Guid accountId, decimal amount)
+        //{
+        //    if (amount <= 0)
+        //    {
+        //        throw new ArgumentException("Withdrawal amount must be greater than zero.", nameof(amount));
+        //    }
 
-            var account = await _accountService.GetByIdAsync(accountId);
-            if (account == null)
-            {
-                throw new InvalidOperationException("Account not found.");
-            }
+        //    var account = await _accountService.GetByIdAsync(accountId);
+        //    if (account == null)
+        //    {
+        //        throw new InvalidOperationException("Account not found.");
+        //    }
 
-            if (account.Balance < amount)
-            {
-                throw new InvalidOperationException("Insufficient funds.");
-            }
+        //    if (account.Balance < amount)
+        //    {
+        //        throw new InvalidOperationException("Insufficient funds.");
+        //    }
 
-            account.Balance -= amount;
+        //    account.Balance -= amount;
 
-            var transaction = new Transaction
-            {
-                TransactionType = "Withdrawal",
-                Amount = amount,
-                Currency = account.Currency,
-                DateTime = DateTime.UtcNow,
-                SourceAccountId = accountId,
-                DestinationAccountId = accountId
-            };
+        //    var transaction = new Transaction
+        //    {
+        //        TransactionType = "Withdrawal",
+        //        Amount = amount,
+        //        Currency = account.Currency,
+        //        DateTime = DateTime.UtcNow,
+        //        SourceAccountId = accountId,
+        //        DestinationAccountId = accountId
+        //    };
 
-            await _transactionService.AddAsync(transaction);
-            await _accountService.UpdateAsync(account);
-        }
+        //    await _transactionService.AddAsync(transaction);
+        //    await _accountService.UpdateAsync(account);
+        //}
     }
 }

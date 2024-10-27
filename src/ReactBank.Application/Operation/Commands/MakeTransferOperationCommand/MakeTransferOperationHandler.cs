@@ -39,7 +39,7 @@ namespace ReactBank.Application.Operation.Commands.MakeTransferOperationCommand
                 {
                     var errors = new Dictionary<string, string[]>
                     {
-                        { "Account", new[] { "Source or destination account not found." } }
+                        { "Account", ["Source or destination account not found."] }
                     };
                     return Result<DefaultOperationDataResponse>.Failure(errors);
                 }
@@ -48,7 +48,7 @@ namespace ReactBank.Application.Operation.Commands.MakeTransferOperationCommand
                 {
                     var errors = new Dictionary<string, string[]>
                     {
-                        { "SourceAccount", new[] { "Insufficient funds in source account." } }
+                        { "SourceAccount", ["Insufficient funds in source account."] }
                     };
                     return Result<DefaultOperationDataResponse>.Failure(errors);
                 }

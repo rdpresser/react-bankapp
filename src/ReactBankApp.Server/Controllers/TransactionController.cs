@@ -18,23 +18,37 @@ namespace ReactBankApp.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TransactionDataResponse>>> Get()
         {
-            //var transactions = await _transactionAppService.GetAllAsync();
-            //return Ok(transactions);
-
-            return Ok();
+            var result = await _transactionAppService.GetAllAsync();
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TransactionDataResponse>> Get(Guid id)
         {
-            //var transaction = await _transactionAppService.GetByIdAsync(id);
-            //if (transaction == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return Ok(transaction);
-            return Ok();
+            var result = await _transactionAppService.GetByIdAsync(id);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
     }
 }

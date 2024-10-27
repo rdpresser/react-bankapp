@@ -1,13 +1,22 @@
 ﻿namespace ReactBank.Application.Transaction.DataContracts
 {
-    public class TransactionDataResponse
-    {
-        public Guid Id { get; set; }
-        public string TransactionType { get; set; } //Create enum for TransactionType (Deposit, Withdrawal, Transfer, Payment, Salary, Loan, Investment, Mortgage, Credit, Debit)
-        public decimal Amount { get; set; }
-        public string Currency { get; set; }
-        public string DateTime { get; set; }
-        public string SourceAccount { get; set; }
-        public string DestinationAccount { get; set; }
-    }
+    /// <summary>
+    /// Represents the response data contract for the transaction data.
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <param name="TransactionType"></param>
+    /// <param name="Amount"></param>
+    /// <param name="Currency"></param>
+    /// <param name="DateTime"></param>
+    /// <param name="SourceAccount"></param>
+    /// <param name="DestinationAccount"></param>
+    public record TransactionDataResponse(
+        Guid Id,
+        string TransactionType,
+        decimal Amount,
+        string Currency,
+        string DateTime,
+        string SourceAccount,
+        string DestinationAccount
+    );
 }

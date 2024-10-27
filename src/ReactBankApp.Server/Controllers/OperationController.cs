@@ -33,23 +33,23 @@ namespace ReactBankApp.Server.Controllers
             }
         }
 
-        //[HttpPost("withdraw")]
-        //public async Task<ActionResult> Withdraw(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
-        //{
-        //    var result = await _operationAppService.MakeWithdrawal(makeWithdrawOperationDataRequest);
-        //    if (result.IsSuccess && result.Value != null)
-        //    {
-        //        return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.Id }, result.Value);
-        //    }
-        //    else if (result.IsNotFound)
-        //    {
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(result.Errors);
-        //    }
-        //}
+        [HttpPost("withdraw")]
+        public async Task<ActionResult> Withdraw(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest)
+        {
+            var result = await _operationAppService.MakeWithdrawal(makeWithdrawOperationDataRequest);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.Id }, result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
 
         [HttpPost("transfer")]
         public async Task<ActionResult> Transfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest)
