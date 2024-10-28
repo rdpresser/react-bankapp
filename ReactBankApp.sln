@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactBank.Domain.Core", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactBank.Infra.Data", "src\ReactBank.Infra.Data\ReactBank.Infra.Data.csproj", "{46BCD2BF-6A9B-48E2-8189-8F6020BE976B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactBank.Infra.CrossCutting.IoC", "src\ReactBank.Infra.CrossCutting.IoC\ReactBank.Infra.CrossCutting.IoC.csproj", "{99230CF7-A42B-4E74-8886-ABF766742849}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactBank.Infra.CrossCutting.IoC", "src\ReactBank.Infra.CrossCutting.IoC\ReactBank.Infra.CrossCutting.IoC.csproj", "{99230CF7-A42B-4E74-8886-ABF766742849}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactBank.Application", "src\ReactBank.Application\ReactBank.Application.csproj", "{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactBank.Application", "src\ReactBank.Application\ReactBank.Application.csproj", "{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactBank.Application.Test", "test\ReactBank.Application.Test\ReactBank.Application.Test.csproj", "{540EA61D-B582-432B-A8D4-8B838969BF28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{540EA61D-B582-432B-A8D4-8B838969BF28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{540EA61D-B582-432B-A8D4-8B838969BF28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{540EA61D-B582-432B-A8D4-8B838969BF28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{540EA61D-B582-432B-A8D4-8B838969BF28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{46BCD2BF-6A9B-48E2-8189-8F6020BE976B} = {32599917-CE59-464C-BE40-BA4CAFF57BFB}
 		{99230CF7-A42B-4E74-8886-ABF766742849} = {97F510EE-B869-4C78-BA3F-7E1195309F65}
 		{DD90D157-ECDE-4E23-ACB1-C71D2F4ACAA0} = {2CF39584-CFF2-4453-B84F-4E15CA98A01A}
+		{540EA61D-B582-432B-A8D4-8B838969BF28} = {53F68C7E-FC71-4840-942E-E55159FFDDD8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9865B7A5-161A-4C60-96B0-5834E5B17EE0}

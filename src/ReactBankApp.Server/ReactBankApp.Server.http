@@ -17,7 +17,7 @@ Content-Type: application/json
 POST {{ReactBankApp.Server_HostAddress}}/api/account
 Content-Type: application/json
 {
-  "accountNumber": "123456789123",
+  "accountNumber": "123456789",
   "balance": 100,
   "currency": "BRL",
   "accountType": "SavingsAccount",
@@ -29,5 +29,67 @@ GET {{ReactBankApp.Server_HostAddress}}/api/customer
 Content-Type: application/json
 
 ### GET CUSTOMER BY ID ###
-GET {{ReactBankApp.Server_HostAddress}}/api/customer/849b24e4-f29a-4fb4-91b7-7a9b65795bf6
+GET {{ReactBankApp.Server_HostAddress}}/api/customer/849b24e4-f29a-4fb4-91b7-7a9b65795bf
+Content-Type: application/json
+
+### POST CUSTOMER###
+
+POST {{ReactBankApp.Server_HostAddress}}/api/customer
+Content-Type: application/json
+{
+  "name": "Customer test2",
+  "email": "test@gmail.com",
+  "phone": "39889289432",
+  "streetAddress": "Main street 456",
+  "city": "Criciuma",
+  "state": "SC",
+  "zipCode": "93214-4330",
+  "dateOfBirth": "1980-11-10T15:57:42.968Z",
+  "identityDocument": "982348934298"
+}
+
+### OPERATION DEPOSIT ###
+POST {{ReactBankApp.Server_HostAddress}}/api/operation/deposit
+Content-Type: application/json
+{
+  "accountId": "ba669725-8233-434a-9b1e-751dd752e419",
+  "amount": 1001
+}
+
+###OPERATION WITHDRAW ###
+POST {{ReactBankApp.Server_HostAddress}}/api/operation/withdraw
+Content-Type: application/json
+{
+  "accountId": "ba669725-8233-434a-9b1e-751dd752e419",
+  "amount": 1001
+}
+
+###OPERATION TRANSFER ###
+POST {{ReactBankApp.Server_HostAddress}}/api/operation/transfer
+Content-Type: application/json
+{
+  "sourceAccountId": "ba669725-8233-434a-9b1e-751dd752e419",
+  "destinationAccountId": "ba769725-8233-434a-9b1e-751dd752e419",
+  "amount": 500
+}
+
+###OPERATION LOAN ###
+POST {{ReactBankApp.Server_HostAddress}}/api/operation/loan
+Content-Type: application/json
+{
+  "accountId": "ba669725-8233-434a-9b1e-751dd752e419",
+  "amount": 500,
+  "interestRate": 10,
+  "startDate": "2024-10-28T15:12:50.096Z",
+  "endDate": "2025-10-28T15:12:50.096Z"
+}
+
+### GET TRANSACTION LIST
+
+GET {{ReactBankApp.Server_HostAddress}}/api/transaction
+Content-Type: application/json
+
+### GET TRANSACTION BY ID ###
+
+GET {{ReactBankApp.Server_HostAddress}}/api/transaction/0f097e0c-c1e5-4d55-ae22-9f8b5e7568e5
 Content-Type: application/json
