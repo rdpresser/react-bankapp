@@ -2,6 +2,7 @@
 using ReactBank.Application.Loan.Abstractions;
 using ReactBank.Application.Loan.DataContracts;
 using ReactBank.Application.Loan.Queries.GetAllLoanQuery;
+using ReactBank.Application.Loan.Queries.GetByIdLoanQuery;
 using ReactBank.Domain.Core.Notifications;
 
 namespace ReactBank.Application.Services
@@ -20,9 +21,9 @@ namespace ReactBank.Application.Services
             return await _mediator.Send(new GetAllLoanQuery());
         }
 
-        public Task<Result<LoanDataResponse>> GetByIdAsync(Guid id)
+        public async Task<Result<LoanDataResponse>> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _mediator.Send(new GetByIdLoanQuery(id));
         }
     }
 }

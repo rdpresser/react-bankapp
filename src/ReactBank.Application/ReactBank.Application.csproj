@@ -17,8 +17,4 @@
     <ProjectReference Include="..\ReactBank.Domain\ReactBank.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Loan\Queries\GetByIdLoanQuery\" />
-  </ItemGroup>
-
 </Project>
