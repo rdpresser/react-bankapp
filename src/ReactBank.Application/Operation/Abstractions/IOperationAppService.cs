@@ -1,4 +1,5 @@
-﻿using ReactBank.Application.Operation.DataContracts;
+﻿using ReactBank.Application.Loan.DataContracts;
+using ReactBank.Application.Operation.DataContracts;
 using ReactBank.Domain.Core.Notifications;
 
 namespace ReactBank.Application.Operation.Abstractions
@@ -8,6 +9,6 @@ namespace ReactBank.Application.Operation.Abstractions
         Task<Result<DefaultOperationDataResponse>> MakeDeposit(MakeDepositOperationDataRequest makeDepositOperationDataRequest);
         Task<Result<DefaultOperationDataResponse>> MakeWithdrawal(MakeWithdrawOperationDataRequest makeWithdrawOperationDataRequest);
         Task<Result<DefaultOperationDataResponse>> MakeTransfer(MakeTransferOperationDataRequest makeTransferOperationDataRequest);
-        Task<Result<DefaultOperationDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest);
+        Task<Result<LoanDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest);
     }
 }

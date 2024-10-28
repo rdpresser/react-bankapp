@@ -9,6 +9,9 @@ namespace ReactBank.Application.Operation.Commands.TakeLoanOperationCommand
         {
             ValidateAccountId();
             ValidateAmount();
+            ValidateInterestRate();
+            ValidateStartDate();
+            ValidateEndDate();
         }
     }
 }

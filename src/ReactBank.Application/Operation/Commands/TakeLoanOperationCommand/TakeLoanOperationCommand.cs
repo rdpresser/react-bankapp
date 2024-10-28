@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using ReactBank.Application.Operation.DataContracts;
+using ReactBank.Application.Loan.DataContracts;
 using ReactBank.Domain.Core.Notifications;
 
 namespace ReactBank.Application.Operation.Commands.TakeLoanOperationCommand
@@ -18,5 +18,5 @@ namespace ReactBank.Application.Operation.Commands.TakeLoanOperationCommand
         decimal InterestRate,
         DateTime StartDate,
         DateTime EndDate
-    ) : IRequest<Result<DefaultOperationDataResponse>>;
+    ) : IRequest<Result<LoanDataResponse>>;
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReactBank.Application.Loan.Abstractions;
+using ReactBank.Application.Loan.DataContracts;
 
 namespace ReactBankApp.Server.Controllers
 {
@@ -17,20 +18,37 @@ namespace ReactBankApp.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LoanDataResponse>>> Get()
         {
-            var loans = await _loanAppService.GetAllAsync();
-            return Ok(loans);
+            var result = await _loanAppService.GetAllAsync();
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<LoanDataResponse>> Get(Guid id)
         {
-            var loan = await _loanAppService.GetByIdAsync(id);
-            if (loan == null)
+            var result = await _loanAppService.GetByIdAsync(id);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return Ok(result.Value);
+            }
+            else if (result.IsNotFound)
             {
                 return NotFound();
             }
-
-            return Ok(loan);
+            else
+            {
+                return BadRequest(result.Errors);
+            }
         }
     }
 }

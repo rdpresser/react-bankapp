@@ -13,6 +13,8 @@ function Loan() {
         : <table className="table table-striped" aria-labelledby="tableLabel">
             <thead>
                 <tr>
+                    <th>AccountId</th>
+                    <th>Customer Name</th>
                     <th>Amount</th>
                     <th>Rate</th>
                     <th>Start Date</th>
@@ -22,6 +24,8 @@ function Loan() {
             <tbody>
                 {data.map(item =>
                     <tr key={item.id}>
+                        <td>{item.accountId}</td>
+                        <td>{item.customerName}</td>
                         <td>{item.amount}</td>
                         <td>{item.interestRate}</td>
                         <td>{item.startDate}</td>

@@ -7,6 +7,7 @@
         DateTime StartDate,
         DateTime EndDate,
         Guid AccountId,
-        Guid TransactionId
+        Guid TransactionId,
+        string CustomerName
     );
 }

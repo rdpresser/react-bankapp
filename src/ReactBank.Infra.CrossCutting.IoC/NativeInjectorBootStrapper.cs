@@ -6,11 +6,11 @@ using ReactBank.Application.Commons.Bases.Interfaces.Validations;
 using ReactBank.Application.Customer.Abstractions;
 using ReactBank.Application.Customer.Commands.CreateCustomerCommand;
 using ReactBank.Application.Loan.Abstractions;
-using ReactBank.Application.Loan.Commands.CreateLoanCommand;
 using ReactBank.Application.Operation.Abstractions;
 using ReactBank.Application.Operation.Commands.MakeDepositOperationCommand;
 using ReactBank.Application.Operation.Commands.MakeTransferOperationCommand;
 using ReactBank.Application.Operation.Commands.MakeWithdrawOperationCommand;
+using ReactBank.Application.Operation.Commands.TakeLoanOperationCommand;
 using ReactBank.Application.Services;
 using ReactBank.Application.Transaction.Abstractions;
 using ReactBank.Domain.Interfaces.Repositores;
@@ -52,7 +52,6 @@ namespace ReactBank.Infra.CrossCutting.IoC
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ILoanService, LoanService>();
             services.AddScoped<ITransactionService, TransactionService>();
-            services.AddScoped<IOperationService, OperationService>();
         }
 
         private static void RegisterApplication(IServiceCollection services)
@@ -63,7 +62,7 @@ namespace ReactBank.Infra.CrossCutting.IoC
             services.AddScoped<IBaseValidation<MakeTransferOperationCommand>, MakeTransferOperationValidator>();
             services.AddScoped<IBaseValidation<MakeDepositOperationCommand>, MakeDepositOperationValidator>();
             services.AddScoped<IBaseValidation<MakeWithdrawOperationCommand>, MakeWithdrawOperationValidator>();
-            services.AddScoped<IBaseValidation<CreateLoanCommand>, CreateLoanValidator>();
+            services.AddScoped<IBaseValidation<TakeLoanOperationCommand>, TakeLoanOperationValidator>();
 
             services.AddScoped<ICustomerAppService, CustomerAppService>();
             services.AddScoped<ILoanAppService, LoanAppService>();

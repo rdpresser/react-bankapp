@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ReactBank.Application.Loan.DataContracts;
 using ReactBank.Application.Operation.Commands.MakeDepositOperationCommand;
 using ReactBank.Application.Operation.Commands.MakeTransferOperationCommand;
 using ReactBank.Application.Operation.Commands.MakeWithdrawOperationCommand;
@@ -48,7 +49,7 @@ namespace ReactBank.Application.Operation.Abstractions
             return await _mediator.Send(command);
         }
 
-        public async Task<Result<DefaultOperationDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
+        public async Task<Result<LoanDataResponse>> TakeLoan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
         {
             var command = new TakeLoanOperationCommand(
                 takeLoanOperationDataRequest.AccountId,

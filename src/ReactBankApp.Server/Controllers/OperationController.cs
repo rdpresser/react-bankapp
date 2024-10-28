@@ -69,23 +69,22 @@ namespace ReactBankApp.Server.Controllers
             }
         }
 
-        //[HttpPost("loan")]
-        //public async Task<ActionResult> Loan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
-        //{
-        //    if (takeLoanOperationDataRequest.AccountId == Guid.Empty || takeLoanOperationDataRequest.Amount <= 0)
-        //    {
-        //        return BadRequest("Invalid account ID or amount.");
-        //    }
-
-        //    try
-        //    {
-        //        await _operationAppService.TakeLoan(takeLoanOperationDataRequest);
-        //        return Ok("Loan successful.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
-        //    }
-        //}
+        [HttpPost("loan")]
+        public async Task<ActionResult> Loan(TakeLoanOperationDataRequest takeLoanOperationDataRequest)
+        {
+            var result = await _operationAppService.TakeLoan(takeLoanOperationDataRequest);
+            if (result.IsSuccess && result.Value != null)
+            {
+                return CreatedAtAction(nameof(TransactionController.Get), "Transaction", new { id = result.Value.TransactionId }, result.Value);
+            }
+            else if (result.IsNotFound)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return BadRequest(result.Errors);
+            }
+        }
     }
 }
