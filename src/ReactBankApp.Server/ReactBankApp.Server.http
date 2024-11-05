@@ -1,8 +1,5 @@
 @ReactBankApp.Server_HostAddress = http://localhost:5236
 
-GET {{ReactBankApp.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
 ### GET ACCOUNT LIST###
 
 GET {{ReactBankApp.Server_HostAddress}}/api/account
